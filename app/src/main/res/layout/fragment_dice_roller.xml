@@ -5,15 +5,138 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/dice_button"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="12dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@drawable/ic_dice"
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dice_zone_margin_end"
+        android:layout_marginBottom="@dimen/dice_zone_margin_bottom"
+        android:background="@drawable/layout_bg"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/dice_button"
+            android:layout_width="@dimen/action_button_size"
+            android:layout_height="@dimen/action_button_size"
+            android:layout_row="2"
+            android:layout_column="2"
+            android:layout_marginEnd="@dimen/action_button_margin_extended"
+            android:layout_marginBottom="@dimen/action_button_margin_extended"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/dice_button_closed_text"
+            app:fabCustomSize="@dimen/action_button_size" />
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/dice_d2_button"
+            android:layout_width="@dimen/action_button_size"
+            android:layout_height="@dimen/action_button_size"
+            android:layout_row="2"
+            android:layout_column="1"
+            android:layout_marginEnd="@dimen/action_button_margin"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/fab_d2_text"
+            app:fabCustomSize="@dimen/action_button_size" />
+
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/dice_d4_button"
+            android:layout_width="@dimen/action_button_size"
+            android:layout_height="@dimen/action_button_size"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:layout_marginStart="@dimen/action_button_margin_extended"
+            android:layout_marginEnd="@dimen/action_button_margin"
+            android:layout_marginBottom="@dimen/action_button_margin_extended"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/fab_d4_text"
+            app:fabCustomSize="@dimen/action_button_size" />
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/dice_d6_button"
+            android:layout_width="@dimen/action_button_size"
+            android:layout_height="@dimen/action_button_size"
+            android:layout_row="1"
+            android:layout_column="2"
+            android:layout_marginEnd="@dimen/action_button_margin_extended"
+            android:layout_marginBottom="@dimen/action_button_margin"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/fab_d6_text"
+            app:fabCustomSize="@dimen/action_button_size" />
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/dice_d8_button"
+            android:layout_width="@dimen/action_button_size"
+            android:layout_height="@dimen/action_button_size"
+            android:layout_row="1"
+            android:layout_column="1"
+            android:layout_marginEnd="@dimen/action_button_margin"
+            android:layout_marginBottom="@dimen/action_button_margin"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/fab_d8_text"
+            app:fabCustomSize="@dimen/action_button_size" />
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/dice_d100_button"
+            android:layout_width="@dimen/action_button_size"
+            android:layout_height="@dimen/action_button_size"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:layout_marginStart="@dimen/action_button_margin_extended"
+            android:layout_marginEnd="@dimen/action_button_margin"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/fab_d100_text"
+            android:textSize="11sp"
+            app:fabCustomSize="@dimen/action_button_size" />
+
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/dice_d10_button"
+            android:layout_width="@dimen/action_button_size"
+            android:layout_height="@dimen/action_button_size"
+            android:layout_row="0"
+            android:layout_column="2"
+            android:layout_marginTop="@dimen/action_button_margin_extended"
+            android:layout_marginEnd="@dimen/action_button_margin_extended"
+            android:layout_marginBottom="@dimen/action_button_margin"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/fab_d10_text"
+            app:fabCustomSize="@dimen/action_button_size" />
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/dice_d12_button"
+            android:layout_width="@dimen/action_button_size"
+            android:layout_height="@dimen/action_button_size"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:layout_marginTop="@dimen/action_button_margin_extended"
+            android:layout_marginEnd="@dimen/action_button_margin"
+            android:layout_marginBottom="@dimen/action_button_margin"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/fab_d12_text"
+            app:fabCustomSize="@dimen/action_button_size" />
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/dice_d20_button"
+            android:layout_width="@dimen/action_button_size"
+            android:layout_height="@dimen/action_button_size"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_marginStart="@dimen/action_button_margin_extended"
+            android:layout_marginTop="@dimen/action_button_margin_extended"
+            android:layout_marginEnd="@dimen/action_button_margin"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/fab_d20_text"
+            app:fabCustomSize="@dimen/action_button_size" />
+
+
+    </GridLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

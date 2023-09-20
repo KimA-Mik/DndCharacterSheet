@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -13,7 +12,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import kotlinx.coroutines.launch
 import ru.kima.dndcharactersheet.databinding.FragmentDiceRollerBinding
 
-class DiceRollerFragment:Fragment() {
+class DiceRollerFragment : Fragment() {
     private var _binding: FragmentDiceRollerBinding? = null
     private val binding
         get() = checkNotNull(_binding) {
@@ -41,9 +40,27 @@ class DiceRollerFragment:Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.floatingMenuState.collect { state ->
+                        when (state) {
+                            DiceRollerViewModel.FloatingMenuState.Closed -> {
+                                binding.buttonsGroup.visibility = View.GONE
+                                binding.buttonsGroup.isClickable = false
+                            }
+
+                            DiceRollerViewModel.FloatingMenuState.Opened -> {
+                                binding.buttonsGroup.visibility = View.VISIBLE
+                                binding.buttonsGroup.isClickable = true
+                            }
+
+                            else -> {}
+                        }
+
+                    }
+                }
 
             }
         }
-        binding.diceButton.setOnClickListener { Toast.makeText(context, "Rolling dice", Toast.LENGTH_SHORT).show() }
+        binding.diceButton.setOnClickListener { viewModel.onDiceButtonClicked() }
     }
 }

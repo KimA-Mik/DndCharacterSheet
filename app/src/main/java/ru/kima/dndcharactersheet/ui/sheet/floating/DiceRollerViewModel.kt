@@ -3,6 +3,7 @@ package ru.kima.dndcharactersheet.ui.sheet.floating
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 
 class DiceRollerViewModel : ViewModel() {
     enum class FloatingMenuState {
@@ -14,12 +15,15 @@ class DiceRollerViewModel : ViewModel() {
     private val _floatingMenuState = MutableStateFlow(FloatingMenuState.Closed)
     val floatingMenuState = _floatingMenuState.asStateFlow()
 
-    private val dices = mutableMapOf<Int, Int>()
+    //TODO: find a way no notify collector, when inner collection is changed
+    //private val dice = mutableMapOf<Int, Int>()
+    private val _dice = MutableStateFlow(mutableMapOf<Int, Int>())
+    val dice = _dice.asStateFlow()
 
     fun onDiceButtonClicked() {
         when (_floatingMenuState.value) {
             FloatingMenuState.Closed -> {
-                dices.clear()
+                _dice.value.clear()
                 _floatingMenuState.value = FloatingMenuState.Opened
             }
 
@@ -34,23 +38,40 @@ class DiceRollerViewModel : ViewModel() {
     }
 
     fun addDice(sides: Int) {
-        if (dices.containsKey(sides)) {
-            dices[sides] = dices[sides]!! + 1
-        } else {
-            dices[sides] = 1
+        _dice.update {
+            val dice = copyMap()
+            if (dice.containsKey(sides)) {
+                dice[sides] = dice[sides]!! + 1
+            } else {
+                dice[sides] = 1
+            }
+            dice
         }
+
     }
 
     private fun removeDice(sides: Int) {
-        if (dices.containsKey(sides) &&
-            dices[sides]!! > 0
-        ) {
-            dices[sides] = dices[sides]!! - 1
+        _dice.update {
+            val dice = copyMap()
+            if (dice.containsKey(sides) &&
+                dice[sides]!! > 0
+            ) {
+                dice[sides] = dice[sides]!! - 1
+            }
+            dice
         }
     }
 
     fun onRemoveDice(sides: Int): Boolean {
         removeDice(sides)
         return true
+    }
+
+    private fun copyMap(): MutableMap<Int, Int> {
+        val newMap = mutableMapOf<Int, Int>()
+        dice.value.forEach { (sides, count) ->
+            newMap[sides] = count
+        }
+        return newMap
     }
 }

@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat.ID_NULL
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -23,18 +25,22 @@ class DiceRollerFragment : Fragment() {
 
     private val viewModel: DiceRollerViewModel by viewModels()
 
+    private val diceTextViews = mutableMapOf<Int, TextView>()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDiceRollerBinding.inflate(layoutInflater, container, false)
+        diceTextViews[2] = binding.d2TextView
         return binding.root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        diceTextViews.clear()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,14 +52,15 @@ class DiceRollerFragment : Fragment() {
                     viewModel.floatingMenuState.collect { state ->
                         when (state) {
                             DiceRollerViewModel.FloatingMenuState.Closed -> {
-                                binding.buttonsGroup.visibility = View.GONE
+                                binding.buttonsGroup.isVisible = false
                                 binding.buttonsGroup.isClickable = false
                                 binding.diceButton.setText(R.string.dice_button_closed_text)
                                 binding.diceButton.setIconResource(ID_NULL)
+                                diceTextViews.forEach { it.value.isVisible = false }
                             }
 
                             DiceRollerViewModel.FloatingMenuState.Opened -> {
-                                binding.buttonsGroup.visibility = View.VISIBLE
+                                binding.buttonsGroup.isVisible = true
                                 binding.buttonsGroup.isClickable = true
                                 binding.diceButton.text = ""
                                 binding.diceButton.setIconResource(R.drawable.ic_close)
@@ -62,6 +69,21 @@ class DiceRollerFragment : Fragment() {
                             DiceRollerViewModel.FloatingMenuState.Ready -> {
                                 binding.diceButton.setText(R.string.dice_button_ready_text)
                                 binding.diceButton.setIconResource(ID_NULL)
+                            }
+                        }
+                    }
+                }
+
+                launch {
+                    viewModel.dice.collect { dice ->
+                        dice.forEach { (sides, count) ->
+                            diceTextViews[sides]?.let { textView ->
+                                if (count > 0) {
+                                    textView.text = count.toString()
+                                    textView.isVisible = true
+                                } else {
+                                    textView.isVisible = false
+                                }
                             }
                         }
                     }

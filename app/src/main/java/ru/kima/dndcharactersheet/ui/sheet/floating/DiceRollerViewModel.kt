@@ -4,8 +4,12 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import ru.kima.dndcharactersheet.ui.sheet.floating.recycler_view.DiceRoll
+import ru.kima.dndcharactersheet.ui.sheet.floating.recycler_view.RollListListener
+import kotlin.random.Random
 
-class DiceRollerViewModel : ViewModel() {
+class DiceRollerViewModel : ViewModel(),
+    RollListListener {
     enum class FloatingMenuState {
         Closed,
         Opened,
@@ -20,6 +24,9 @@ class DiceRollerViewModel : ViewModel() {
     private val _dice = MutableStateFlow(mutableMapOf<Int, Int>())
     val dice = _dice.asStateFlow()
 
+    private val _rolls = MutableStateFlow<List<DiceRoll>>(emptyList())
+    val rolls = _rolls.asStateFlow()
+
     fun onDiceButtonClicked() {
         when (_floatingMenuState.value) {
             FloatingMenuState.Closed -> {
@@ -33,6 +40,13 @@ class DiceRollerViewModel : ViewModel() {
 
             FloatingMenuState.Ready -> {
                 _floatingMenuState.value = FloatingMenuState.Closed
+                var newList = _rolls.value + calculateDiceRoll()
+
+                if (newList.size > 5) {
+                    newList = newList.drop(1)
+                }
+
+                _rolls.value = newList
             }
         }
     }
@@ -80,5 +94,46 @@ class DiceRollerViewModel : ViewModel() {
             newMap[sides] = count
         }
         return newMap
+    }
+
+    override fun onClearListPressed() {
+        _rolls.value = emptyList()
+    }
+
+    private fun calculateDiceRoll(): DiceRoll {
+        val resSb = StringBuilder()
+        val diceSb = StringBuilder()
+        var sum = 0
+        _dice.value.forEach { (sides, count) ->
+            if (count == 0) {
+                return@forEach
+            }
+
+            if (resSb.isNotEmpty()) {
+                resSb.append(" + ")
+            }
+            resSb.append('(')
+            repeat(count) { i ->
+                val currentRoll = rollDice(sides)
+                sum += currentRoll
+                if (i > 0) {
+                    resSb.append(" + ")
+                }
+                resSb.append(currentRoll)
+            }
+            resSb.append(')')
+
+            //TODO: Replace to translatable format string
+            if (diceSb.isNotEmpty()) {
+                diceSb.append(" + ")
+            }
+            diceSb.append("(${count}d${sides}")
+            diceSb.append(')')
+        }
+        return DiceRoll(sum, resSb.toString(), diceSb.toString())
+    }
+
+    private fun rollDice(sides: Int): Int {
+        return Random.nextInt(1, sides)
     }
 }

@@ -12,9 +12,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.launch
 import ru.kima.dndcharactersheet.R
 import ru.kima.dndcharactersheet.databinding.FragmentDiceRollerBinding
+import ru.kima.dndcharactersheet.ui.sheet.floating.recycler_view.DiceRollAdapter
+import ru.kima.dndcharactersheet.ui.sheet.floating.recycler_view.DiceRollDiffCallback
 
 class DiceRollerFragment : Fragment() {
     private var _binding: FragmentDiceRollerBinding? = null
@@ -24,6 +28,7 @@ class DiceRollerFragment : Fragment() {
         }
 
     private val viewModel: DiceRollerViewModel by viewModels()
+    private val adapter: DiceRollAdapter by lazy { DiceRollAdapter(viewModel) }
 
     private val diceTextViews = mutableMapOf<Int, TextView>()
 
@@ -41,6 +46,10 @@ class DiceRollerFragment : Fragment() {
         diceTextViews[12] = binding.d12TextView
         diceTextViews[20] = binding.d20TextView
         diceTextViews[100] = binding.d100TextView
+
+        binding.rollsRecyclerView.layoutManager = LinearLayoutManager(context)
+        binding.rollsRecyclerView.adapter = adapter
+
         return binding.root
     }
 
@@ -86,6 +95,15 @@ class DiceRollerFragment : Fragment() {
                 launch {
                     viewModel.dice.collect { dice ->
                         updateTextViews(dice)
+                    }
+                }
+
+                launch {
+                    viewModel.rolls.collect { rolls ->
+                        val diffCallback = DiceRollDiffCallback(adapter.rolls, rolls)
+                        val diffRolls = DiffUtil.calculateDiff(diffCallback)
+                        adapter.rolls = rolls
+                        diffRolls.dispatchUpdatesTo(adapter)
                     }
                 }
             }

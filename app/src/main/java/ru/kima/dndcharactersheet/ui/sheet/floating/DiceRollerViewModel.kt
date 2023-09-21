@@ -32,7 +32,7 @@ class DiceRollerViewModel : ViewModel() {
             }
 
             FloatingMenuState.Ready -> {
-
+                _floatingMenuState.value = FloatingMenuState.Closed
             }
         }
     }
@@ -47,7 +47,7 @@ class DiceRollerViewModel : ViewModel() {
             }
             dice
         }
-
+        _floatingMenuState.value = FloatingMenuState.Ready
     }
 
     private fun removeDice(sides: Int) {
@@ -60,6 +60,13 @@ class DiceRollerViewModel : ViewModel() {
             }
             dice
         }
+
+        for (i in _dice.value.keys) {
+            if (_dice.value[i]!! > 0) {
+                return
+            }
+        }
+        _floatingMenuState.value = FloatingMenuState.Opened
     }
 
     fun onRemoveDice(sides: Int): Boolean {

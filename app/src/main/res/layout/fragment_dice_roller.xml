@@ -24,6 +24,7 @@
             android:focusable="true"
             android:text="@string/dice_button_closed_text"
             app:fabCustomSize="@dimen/action_button_size"
+            app:iconGravity="end"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -159,6 +160,104 @@
             app:layout_constraintEnd_toEndOf="@+id/dice_d2_button"
             app:layout_constraintStart_toStartOf="@+id/dice_d2_button"
             app:layout_constraintTop_toTopOf="@+id/dice_d2_button"
+            tools:text="0" />
+
+        <TextView
+            android:id="@+id/d4_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="16dp"
+            android:shadowColor="@color/white"
+            android:shadowRadius="5"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            app:layout_constraintBottom_toBottomOf="@+id/dice_d4_button"
+            app:layout_constraintEnd_toEndOf="@+id/dice_d4_button"
+            app:layout_constraintStart_toStartOf="@+id/dice_d4_button"
+            app:layout_constraintTop_toTopOf="@+id/dice_d4_button"
+            tools:text="0" />
+
+        <TextView
+            android:id="@+id/d6_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="16dp"
+            android:shadowColor="@color/white"
+            android:shadowRadius="5"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            app:layout_constraintBottom_toBottomOf="@+id/dice_d6_button"
+            app:layout_constraintEnd_toEndOf="@+id/dice_d6_button"
+            app:layout_constraintStart_toStartOf="@+id/dice_d6_button"
+            app:layout_constraintTop_toTopOf="@+id/dice_d6_button"
+            tools:text="0" />
+
+        <TextView
+            android:id="@+id/d8_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="16dp"
+            android:shadowColor="@color/white"
+            android:shadowRadius="5"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            app:layout_constraintBottom_toBottomOf="@+id/dice_d8_button"
+            app:layout_constraintEnd_toEndOf="@+id/dice_d8_button"
+            app:layout_constraintStart_toStartOf="@+id/dice_d8_button"
+            app:layout_constraintTop_toTopOf="@+id/dice_d8_button"
+            tools:text="0" />
+
+        <TextView
+            android:id="@+id/d100_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="16dp"
+            android:shadowColor="@color/white"
+            android:shadowRadius="5"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            app:layout_constraintBottom_toBottomOf="@+id/dice_d100_button"
+            app:layout_constraintEnd_toEndOf="@+id/dice_d100_button"
+            app:layout_constraintStart_toStartOf="@+id/dice_d100_button"
+            app:layout_constraintTop_toTopOf="@+id/dice_d100_button"
+            tools:text="0" />
+
+        <TextView
+            android:id="@+id/d10_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="16dp"
+            android:shadowColor="@color/white"
+            android:shadowRadius="5"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            app:layout_constraintBottom_toBottomOf="@+id/dice_d10_button"
+            app:layout_constraintEnd_toEndOf="@+id/dice_d10_button"
+            app:layout_constraintStart_toStartOf="@+id/dice_d10_button"
+            app:layout_constraintTop_toTopOf="@+id/dice_d10_button"
+            tools:text="0" />
+
+        <TextView
+            android:id="@+id/d12_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="16dp"
+            android:shadowColor="@color/white"
+            android:shadowRadius="5"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            app:layout_constraintBottom_toBottomOf="@+id/dice_d12_button"
+            app:layout_constraintEnd_toEndOf="@+id/dice_d12_button"
+            app:layout_constraintStart_toStartOf="@+id/dice_d12_button"
+            app:layout_constraintTop_toTopOf="@+id/dice_d12_button"
+            tools:text="0" />
+
+        <TextView
+            android:id="@+id/d20_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="16dp"
+            android:shadowColor="@color/white"
+            android:shadowRadius="5"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            app:layout_constraintBottom_toBottomOf="@+id/dice_d20_button"
+            app:layout_constraintEnd_toEndOf="@+id/dice_d20_button"
+            app:layout_constraintStart_toStartOf="@+id/dice_d20_button"
+            app:layout_constraintTop_toTopOf="@+id/dice_d20_button"
             tools:text="0" />
 
 

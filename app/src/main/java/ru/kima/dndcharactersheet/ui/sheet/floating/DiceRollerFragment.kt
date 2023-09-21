@@ -34,6 +34,13 @@ class DiceRollerFragment : Fragment() {
     ): View {
         _binding = FragmentDiceRollerBinding.inflate(layoutInflater, container, false)
         diceTextViews[2] = binding.d2TextView
+        diceTextViews[4] = binding.d4TextView
+        diceTextViews[6] = binding.d6TextView
+        diceTextViews[8] = binding.d8TextView
+        diceTextViews[10] = binding.d10TextView
+        diceTextViews[12] = binding.d12TextView
+        diceTextViews[20] = binding.d20TextView
+        diceTextViews[100] = binding.d100TextView
         return binding.root
     }
 
@@ -107,6 +114,5 @@ class DiceRollerFragment : Fragment() {
         binding.diceD20Button.setOnLongClickListener { viewModel.onRemoveDice(20) }
         binding.diceD100Button.setOnClickListener { viewModel.addDice(100) }
         binding.diceD100Button.setOnLongClickListener { viewModel.onRemoveDice(100) }
-
     }
 }

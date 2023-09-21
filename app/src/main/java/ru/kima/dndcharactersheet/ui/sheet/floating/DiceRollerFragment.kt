@@ -71,11 +71,13 @@ class DiceRollerFragment : Fragment() {
                                 binding.buttonsGroup.isClickable = true
                                 binding.diceButton.text = ""
                                 binding.diceButton.setIconResource(R.drawable.ic_close)
+                                updateTextViews(viewModel.dice.value)
                             }
 
                             DiceRollerViewModel.FloatingMenuState.Ready -> {
                                 binding.diceButton.setText(R.string.dice_button_ready_text)
                                 binding.diceButton.setIconResource(ID_NULL)
+                                updateTextViews(viewModel.dice.value)
                             }
                         }
                     }
@@ -83,16 +85,7 @@ class DiceRollerFragment : Fragment() {
 
                 launch {
                     viewModel.dice.collect { dice ->
-                        dice.forEach { (sides, count) ->
-                            diceTextViews[sides]?.let { textView ->
-                                if (count > 0) {
-                                    textView.text = count.toString()
-                                    textView.isVisible = true
-                                } else {
-                                    textView.isVisible = false
-                                }
-                            }
-                        }
+                        updateTextViews(dice)
                     }
                 }
             }
@@ -114,5 +107,22 @@ class DiceRollerFragment : Fragment() {
         binding.diceD20Button.setOnLongClickListener { viewModel.onRemoveDice(20) }
         binding.diceD100Button.setOnClickListener { viewModel.addDice(100) }
         binding.diceD100Button.setOnLongClickListener { viewModel.onRemoveDice(100) }
+    }
+
+    private fun updateTextViews(diceValues: Map<Int, Int>) {
+        diceTextViews.forEach { (sides, view) ->
+            if (!diceValues.containsKey(sides)) {
+                view.isVisible = false
+                return@forEach
+            }
+
+            val count = diceValues[sides]!!
+            if (count > 0) {
+                view.text = count.toString()
+                view.isVisible = true
+            } else {
+                view.isVisible = false
+            }
+        }
     }
 }

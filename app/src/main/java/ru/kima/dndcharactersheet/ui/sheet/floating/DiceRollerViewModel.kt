@@ -134,6 +134,6 @@ class DiceRollerViewModel : ViewModel(),
     }
 
     private fun rollDice(sides: Int): Int {
-        return Random.nextInt(1, sides)
+        return Random.nextInt(1, sides + 1)
     }
 }

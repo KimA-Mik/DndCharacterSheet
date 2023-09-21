@@ -65,6 +65,12 @@ class DiceRollerFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
+                    viewModel.dice.collect { dice ->
+                        updateTextViews(dice)
+                    }
+                }
+
+                launch {
                     viewModel.floatingMenuState.collect { state ->
                         when (state) {
                             DiceRollerViewModel.FloatingMenuState.Closed -> {
@@ -89,12 +95,6 @@ class DiceRollerFragment : Fragment() {
                                 updateTextViews(viewModel.dice.value)
                             }
                         }
-                    }
-                }
-
-                launch {
-                    viewModel.dice.collect { dice ->
-                        updateTextViews(dice)
                     }
                 }
 

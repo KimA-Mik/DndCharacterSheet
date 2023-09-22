@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">DndCharacterSheet</string>
+    <string name="dice_button_closed_text">Dice</string>
+    <string name="dice_button_ready_text">Roll</string>
+    <string name="fab_d2_text">d2</string>
+    <string name="fab_d4_text">d4</string>
+    <string name="fab_d6_text">d6</string>
+    <string name="fab_d8_text">d8</string>
+    <string name="fab_d10_text">d10</string>
+    <string name="fab_d12_text">d12</string>
+    <string name="fab_d20_text">d20</string>
+    <string name="fab_d100_text">d100</string>
+    <string name="clear_rolls_button_content_description">This button clears list of rolls</string>
+
 </resources>

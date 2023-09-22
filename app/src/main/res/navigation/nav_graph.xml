@@ -9,10 +9,18 @@
         android:id="@+id/characterSheetFragment"
         android:name="ru.kima.dndcharactersheet.ui.sheet.CharacterSheetFragment"
         android:label="CharacterSheetFragment"
-        tools:layout="@layout/fragment_character_sheet" />
+        tools:layout="@layout/fragment_character_sheet">
+        <argument
+            android:name="character_id"
+            app:argType="integer" />
+    </fragment>
     <fragment
         android:id="@+id/charactersListFragment"
         android:name="ru.kima.dndcharactersheet.ui.characterslist.CharactersListFragment"
         android:label="CharactersListFragment"
-        tools:layout="@layout/fragment_characters_list" />
+        tools:layout="@layout/fragment_characters_list">
+        <action
+            android:id="@+id/show_character_sheet"
+            app:destination="@id/characterSheetFragment" />
+    </fragment>
 </navigation>

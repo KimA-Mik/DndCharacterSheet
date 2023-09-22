@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.navArgs
 import kotlinx.coroutines.launch
 import ru.kima.dndcharactersheet.databinding.FragmentCharacterSheetBinding
 
@@ -20,6 +21,12 @@ class CharacterSheetFragment : Fragment() {
         }
 
     private val viewModel: CharacterSheetViewModel by viewModels()
+    private val args: CharacterSheetFragmentArgs by navArgs()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.loadCharacter(args.characterId)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,7 +44,7 @@ class CharacterSheetFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        binding.helloWorldTextView.text = args.characterId.toString()
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
 

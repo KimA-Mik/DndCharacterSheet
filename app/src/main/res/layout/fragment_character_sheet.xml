@@ -6,20 +6,20 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/die_roller_container"
+        android:name="ru.kima.dndcharactersheet.ui.sheet.floating.DiceRollerFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="ru.kima.dndcharactersheet.ui.sheet.floating.DiceRollerFragment"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/hello_world_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello world"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

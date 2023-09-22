@@ -47,6 +47,7 @@ class DiceRollerViewModel : ViewModel(),
                 }
 
                 _rolls.value = newList
+                _dice.value.clear()
             }
         }
     }

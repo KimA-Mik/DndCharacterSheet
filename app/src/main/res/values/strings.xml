@@ -11,5 +11,7 @@
     <string name="fab_d20_text">d20</string>
     <string name="fab_d100_text">d100</string>
     <string name="clear_rolls_button_content_description">This button clears list of rolls</string>
+    <string name="dash">–</string>
+    <string name="hp">%1$d/%2$d</string>
 
 </resources>

@@ -11,11 +11,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.launch
 import ru.kima.dndcharactersheet.databinding.FragmentCharactersListBinding
 import ru.kima.dndcharactersheet.ui.characterslist.recyclerview.CharactersListAdapter
 import ru.kima.dndcharactersheet.ui.characterslist.recyclerview.CharactersListDiffCallback
+import ru.kima.dndcharactersheet.ui.characterslist.recyclerview.SwipeCallback
 import ru.kima.dndcharactersheet.ui.factory
 
 class CharactersListFragment : Fragment() {
@@ -39,8 +41,13 @@ class CharactersListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCharactersListBinding.inflate(layoutInflater, container, false)
+
+        //Config recyclerView
         binding.charactersRecyclerView.layoutManager = LinearLayoutManager(context)
         binding.charactersRecyclerView.adapter = adapter
+        val touchHelper = ItemTouchHelper(SwipeCallback(viewModel))
+        touchHelper.attachToRecyclerView(binding.charactersRecyclerView)
+
         return binding.root
     }
 

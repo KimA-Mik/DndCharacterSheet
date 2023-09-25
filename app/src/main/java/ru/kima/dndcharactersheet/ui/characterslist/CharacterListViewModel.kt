@@ -8,10 +8,13 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import ru.kima.dndcharactersheet.data.entities.CharacterEntity
 import ru.kima.dndcharactersheet.model.CharactersDatabaseService
+import ru.kima.dndcharactersheet.ui.characterslist.recyclerview.SwipeListener
 import ru.kima.dndcharactersheet.util.Event
 
 class CharacterListViewModel(private val database: CharactersDatabaseService) :
-    ViewModel(), CharacterListListener {
+    ViewModel(),
+    CharacterListListener,
+    SwipeListener {
 
     private val _showSheet = MutableStateFlow<Event<Int?>>(Event(null))
     val showSheet = _showSheet.asStateFlow()
@@ -36,7 +39,9 @@ class CharacterListViewModel(private val database: CharactersDatabaseService) :
     val characters = _characters.asStateFlow()
 
     init {
-        loadCharacters()
+        viewModelScope.launch(Dispatchers.IO) {
+            loadCharacters()
+        }
     }
 
     fun createCharacter() = viewModelScope.launch(Dispatchers.IO) {
@@ -44,16 +49,23 @@ class CharacterListViewModel(private val database: CharactersDatabaseService) :
             name = "New character"
         )
         database.addCharacter(character)
-        val characters = database.getAllCharacters()
-        _characters.value = characters
+        loadCharacters()
     }
 
     override fun onListItemClicked(charId: Int) {
         _showSheet.value = Event(charId)
     }
 
-    private fun loadCharacters() = viewModelScope.launch(Dispatchers.IO) {
+    private suspend fun loadCharacters() {
         val characters = database.getAllCharacters()
         _characters.value = characters
+    }
+
+    override fun onItemDismiss(position: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val elementId = _characters.value[position].id
+            database.deleteCharacterById(elementId)
+            loadCharacters()
+        }
     }
 }

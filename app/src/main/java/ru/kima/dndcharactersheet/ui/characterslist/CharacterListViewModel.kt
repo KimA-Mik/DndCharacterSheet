@@ -4,9 +4,10 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import ru.kima.dndcharactersheet.data.entities.CharacterEntity
+import ru.kima.dndcharactersheet.model.CharactersDatabaseService
 import ru.kima.dndcharactersheet.util.Event
 
-class CharacterListViewModel() :
+class CharacterListViewModel(private val database: CharactersDatabaseService) :
     ViewModel(), CharacterListListener {
 
     private val _showSheet = MutableStateFlow<Event<Int?>>(Event(null))

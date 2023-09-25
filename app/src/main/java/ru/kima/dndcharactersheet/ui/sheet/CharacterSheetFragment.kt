@@ -12,6 +12,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
 import kotlinx.coroutines.launch
 import ru.kima.dndcharactersheet.databinding.FragmentCharacterSheetBinding
+import ru.kima.dndcharactersheet.ui.factory
 
 class CharacterSheetFragment : Fragment() {
     private var _binding: FragmentCharacterSheetBinding? = null
@@ -20,7 +21,7 @@ class CharacterSheetFragment : Fragment() {
             "Cannot access binding because it is null. Is the view visible?"
         }
 
-    private val viewModel: CharacterSheetViewModel by viewModels()
+    private val viewModel: CharacterSheetViewModel by viewModels() { factory() }
     private val args: CharacterSheetFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {

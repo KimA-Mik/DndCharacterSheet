@@ -16,6 +16,7 @@ import kotlinx.coroutines.launch
 import ru.kima.dndcharactersheet.databinding.FragmentCharactersListBinding
 import ru.kima.dndcharactersheet.ui.characterslist.recyclerview.CharactersListAdapter
 import ru.kima.dndcharactersheet.ui.characterslist.recyclerview.CharactersListDiffCallback
+import ru.kima.dndcharactersheet.ui.factory
 
 class CharactersListFragment : Fragment() {
     private var _binding: FragmentCharactersListBinding? = null
@@ -24,7 +25,7 @@ class CharactersListFragment : Fragment() {
             "Cannot access binding because it is null. Is the view visible?"
         }
 
-    private val viewModel: CharacterListViewModel by viewModels()
+    private val viewModel: CharacterListViewModel by viewModels() { factory() }
     private val adapter: CharactersListAdapter by lazy {
         CharactersListAdapter(
             requireContext(),

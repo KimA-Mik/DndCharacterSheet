@@ -1,4 +1,4 @@
-package ru.kima.dndcharactersheet.ui.sheet.floating.recycler_view
+package ru.kima.dndcharactersheet.ui.sheet.floating.recyclerview
 
 data class DiceRoll(
     val sum: Int,

@@ -17,8 +17,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.launch
 import ru.kima.dndcharactersheet.R
 import ru.kima.dndcharactersheet.databinding.FragmentDiceRollerBinding
-import ru.kima.dndcharactersheet.ui.sheet.floating.recycler_view.DiceRollAdapter
-import ru.kima.dndcharactersheet.ui.sheet.floating.recycler_view.DiceRollDiffCallback
+import ru.kima.dndcharactersheet.ui.sheet.floating.recyclerview.DiceRollAdapter
+import ru.kima.dndcharactersheet.ui.sheet.floating.recyclerview.DiceRollDiffCallback
 
 class DiceRollerFragment : Fragment() {
     private var _binding: FragmentDiceRollerBinding? = null

@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import ru.kima.dndcharactersheet.ui.sheet.floating.recycler_view.DiceRoll
-import ru.kima.dndcharactersheet.ui.sheet.floating.recycler_view.RollListListener
+import ru.kima.dndcharactersheet.ui.sheet.floating.recyclerview.DiceRoll
+import ru.kima.dndcharactersheet.ui.sheet.floating.recyclerview.RollListListener
 import kotlin.random.Random
 
 class DiceRollerViewModel : ViewModel(),

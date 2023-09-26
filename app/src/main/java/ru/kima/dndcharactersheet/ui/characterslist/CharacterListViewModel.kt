@@ -41,6 +41,13 @@ class CharacterListViewModel(private val database: CharactersDatabaseService) :
     init {
         viewModelScope.launch(Dispatchers.IO) {
             loadCharacters()
+            //TODO: remove debug elements
+            if (_characters.value.isEmpty()) {
+                charactersList.forEach {
+                    database.addCharacter(it)
+                }
+                loadCharacters()
+            }
         }
     }
 

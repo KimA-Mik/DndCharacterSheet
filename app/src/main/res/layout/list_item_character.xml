@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:textColor="?attr/colorOnSurface"
+        android:textColor="?attr/colorOnPrimaryContainer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="DJ Жаба" />
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:textColor="?attr/colorOnSurface"
+        android:textColor="?attr/colorOnPrimaryContainer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/name_text_view"
         tools:text="Грунг" />
@@ -38,7 +38,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
         android:text="@string/dash"
-        android:textColor="?attr/colorOnSurface"
+        android:textColor="?attr/colorOnPrimaryContainer"
         app:layout_constraintStart_toEndOf="@id/race_text_view"
         app:layout_constraintTop_toBottomOf="@id/name_text_view" />
 
@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
-        android:textColor="?attr/colorOnSurface"
+        android:textColor="?attr/colorOnPrimaryContainer"
         app:layout_constraintStart_toEndOf="@id/dash_text_view"
         app:layout_constraintTop_toBottomOf="@id/name_text_view"
         tools:text="Плут" />
@@ -59,18 +59,19 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:importantForAccessibility="no"
         android:paddingBottom="8dp"
         android:src="@drawable/ic_heartbeat"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/dash_text_view"
-        app:tint="?attr/colorOnSurface" />
+        app:tint="?attr/colorOnPrimaryContainer" />
 
     <TextView
         android:id="@+id/hp_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:textColor="?attr/colorOnSurface"
+        android:textColor="?attr/colorOnPrimaryContainer"
         app:layout_constraintStart_toEndOf="@+id/hp_image_view"
         app:layout_constraintTop_toTopOf="@id/hp_image_view"
         tools:text="8/8" />

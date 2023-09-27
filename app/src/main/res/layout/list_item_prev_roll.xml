@@ -15,6 +15,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:paddingBottom="8dp"
+        android:textColor="?attr/colorOnSecondaryContainer"
         tools:text="43" />
 
     <TextView
@@ -23,6 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
+        android:textColor="?attr/colorOnSecondaryContainer"
         tools:text="БРОСОК" />
 
     <TextView
@@ -32,6 +34,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:paddingEnd="8dp"
+        android:textColor="?attr/colorOnSecondaryContainer"
         tools:ignore="RtlSymmetry"
         tools:text="МУДРОСТИ" />
 </LinearLayout>

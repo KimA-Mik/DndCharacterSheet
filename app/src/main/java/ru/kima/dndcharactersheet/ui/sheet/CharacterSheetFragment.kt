@@ -87,9 +87,27 @@ class CharacterSheetFragment : Fragment() {
                             updateXpBar(xpBarPercent)
                         }
 
+                        //TODO: Remove debug
                         minXP = xpToCurrentLevel
                         maxXp = xpToNextLevel
                         binding.debugSeekbar.progress = xpBarPercent
+
+                        binding.armorTextView.text = character.armorClass.toString()
+
+                        binding.sheetHpTextView.text =
+                            getString(R.string.hp, character.currentHp, character.maxHp)
+                        val hpPercent =
+                            if (character.maxHp == 0)
+                                100
+                            else
+                                character.currentHp * 100 / character.maxHp
+                        val color = when (hpPercent) {
+                            in 67..100 -> requireContext().getColor(R.color.hp_color_green)
+                            in 34..66 -> requireContext().getColor(R.color.hp_color_yellow)
+                            in 0..33 -> requireContext().getColor(R.color.hp_color_red)
+                            else -> 0
+                        }
+                        setHpColor(color)
                     }
                 }
             }
@@ -121,5 +139,13 @@ class CharacterSheetFragment : Fragment() {
         params.width = width
         params.height = MATCH_PARENT
         binding.xpProgressBar.layoutParams = params
+    }
+
+    private fun setHpColor(color: Int) {
+        binding.sheetHpTextView.setTextColor(color)
+        binding.hpImageView.setColorFilter(color)
+        val background = binding.hpLayout.background
+//        background.mutate()
+        background.setTint(color)
     }
 }

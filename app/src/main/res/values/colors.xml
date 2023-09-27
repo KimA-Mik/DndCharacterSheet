@@ -3,4 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="xp_color">#FF8E54E9</color>
+    <color name="hp_color_green">#629393</color>
+    <color name="hp_color_yellow">#FBD46D</color>
+    <color name="hp_color_red">#E64747</color>
 </resources>

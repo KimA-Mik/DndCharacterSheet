@@ -27,7 +27,8 @@ class CharacterListViewModel(private val database: CharactersDatabaseService) :
             currentHp = 8,
             maxHp = 8,
             level = 3,
-            experiencePoints = 1080
+            experiencePoints = 1080,
+            armorClass = 16
         ),
         CharacterEntity(
             name = "Болт",
@@ -36,7 +37,8 @@ class CharacterListViewModel(private val database: CharactersDatabaseService) :
             currentHp = 1,
             maxHp = 12,
             level = 1,
-            experiencePoints = 150
+            experiencePoints = 150,
+            armorClass = 14
         )
     )
     private val _characters = MutableStateFlow(charactersList)

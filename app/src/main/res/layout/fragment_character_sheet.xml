@@ -30,7 +30,7 @@
             android:id="@+id/character_name_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+            android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -40,6 +40,7 @@
             android:id="@+id/race_and_class_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/character_name_text_view"
@@ -70,6 +71,7 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
+                    android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                     tools:text="3 уровень" />
             </FrameLayout>
 
@@ -91,6 +93,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                     tools:text="0/300" />
 
                 <com.google.android.material.textview.MaterialTextView
@@ -100,12 +103,68 @@
                     android:layout_gravity="end"
                     android:layout_marginEnd="8dp"
                     android:gravity="center"
+                    android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                     tools:text="3" />
 
             </FrameLayout>
 
 
         </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/armor_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:background="#00000000"
+            android:src="@drawable/ic_armor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/experience_layout"
+            tools:ignore="ContentDescription" />
+
+        <LinearLayout
+            android:id="@+id/hp_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/layout_hp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/experience_layout">
+
+            <ImageView
+                android:id="@+id/hp_image_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/ic_heartbeat"
+                tools:ignore="ContentDescription" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/sheet_hp_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                tools:text="8/8" />
+        </LinearLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/armor_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+            app:layout_constraintBottom_toBottomOf="@id/armor_button"
+            app:layout_constraintEnd_toEndOf="@id/armor_button"
+            app:layout_constraintStart_toStartOf="@id/armor_button"
+            app:layout_constraintTop_toTopOf="@id/armor_button"
+            tools:text="14" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

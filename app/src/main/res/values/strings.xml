@@ -14,5 +14,6 @@
     <string name="dash">–</string>
     <string name="hp">%1$d/%2$d</string>
     <string name="race_and_class">%1$s – %2$s</string>
+    <string name="level">%1$d LEVEL</string>
 
 </resources>

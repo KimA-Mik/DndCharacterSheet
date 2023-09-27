@@ -14,6 +14,6 @@ data class CharacterEntity(
     val currentHp: Int = 0,
     val maxHp: Int = 0,
     val armorClass: Int = 0,
-    val experiencePoints: Int = 0
+    val experiencePoints: Int = 0,
+    val level: Int = 1
 )
-//Модификатор характеристики: (Значение характеристики - 10) / 2. Округление в меньшую сторону.

@@ -64,19 +64,20 @@
                 android:background="@drawable/layout_xp_left_background">
 
                 <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/current_level_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
-                    android:text="3 уровень" />
+                    tools:text="3 уровень" />
             </FrameLayout>
 
             <FrameLayout
                 android:id="@+id/xp_progress_bar_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="4dp">
+                android:layout_marginStart="2dp">
 
                 <FrameLayout
                     android:id="@+id/xp_progress_bar"
@@ -90,7 +91,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="0/300" />
+                    tools:text="0/300" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/next_level_text_view"
@@ -99,7 +100,7 @@
                     android:layout_gravity="end"
                     android:layout_marginEnd="8dp"
                     android:gravity="center"
-                    android:text="3" />
+                    tools:text="3" />
 
             </FrameLayout>
 

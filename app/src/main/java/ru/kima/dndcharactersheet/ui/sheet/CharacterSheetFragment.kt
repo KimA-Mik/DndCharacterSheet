@@ -107,7 +107,9 @@ class CharacterSheetFragment : Fragment() {
         else if (percent < 0) 0
         else percent
         val width = binding.xpProgressBarContainer.width * newVal / 100
-        val params = ViewGroup.LayoutParams(width, MATCH_PARENT)
+        val params = binding.xpProgressBar.layoutParams
+        params.width = width
+        params.height = MATCH_PARENT
         binding.xpProgressBar.layoutParams = params
     }
 }

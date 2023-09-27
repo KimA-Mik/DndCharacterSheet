@@ -27,7 +27,7 @@ class CharacterListViewModel(private val database: CharactersDatabaseService) :
             currentHp = 8,
             maxHp = 8,
             level = 3,
-            experiencePoints = 915
+            experiencePoints = 1080
         ),
         CharacterEntity(
             name = "Болт",

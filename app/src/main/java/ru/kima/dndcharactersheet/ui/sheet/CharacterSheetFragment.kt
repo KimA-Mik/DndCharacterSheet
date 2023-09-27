@@ -2,12 +2,14 @@ package ru.kima.dndcharactersheet.ui.sheet
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
+import androidx.annotation.ColorInt
 import androidx.core.view.doOnLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -20,6 +22,7 @@ import ru.kima.dndcharactersheet.R
 import ru.kima.dndcharactersheet.databinding.FragmentCharacterSheetBinding
 import ru.kima.dndcharactersheet.ui.factory
 import kotlin.math.max
+
 
 class CharacterSheetFragment : Fragment() {
     private var _binding: FragmentCharacterSheetBinding? = null
@@ -101,12 +104,16 @@ class CharacterSheetFragment : Fragment() {
                                 100
                             else
                                 character.currentHp * 100 / character.maxHp
-                        val color = when (hpPercent) {
-                            in 67..100 -> requireContext().getColor(R.color.hp_color_green)
-                            in 34..66 -> requireContext().getColor(R.color.hp_color_yellow)
-                            in 0..33 -> requireContext().getColor(R.color.hp_color_red)
+                        val colorId = when (hpPercent) {
+                            in 67..100 -> R.attr.colorHpGreen
+                            in 34..66 -> R.attr.colorHpYellow
+                            in 0..33 -> R.attr.colorHpRed
                             else -> 0
                         }
+                        val typedValue = TypedValue()
+                        val theme = requireContext().theme
+                        theme.resolveAttribute(colorId, typedValue, true)
+                        @ColorInt val color = typedValue.data
                         setHpColor(color)
                     }
                 }

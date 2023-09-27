@@ -50,6 +50,10 @@ class CharacterSheetFragment : Fragment() {
         _binding = null
     }
 
+    var minXP = 0
+    var maxXp = 0
+    private fun lerp(a: Int, b: Int, x: Int) = a + (b - a) * x / 100
+
     //(character.level + 1).toString() causes this warning
     //Although it sums to ints and converts result to sting
     @SuppressLint("SetTextI18n")
@@ -82,6 +86,10 @@ class CharacterSheetFragment : Fragment() {
                         binding.xpProgressBarContainer.doOnLayout {
                             updateXpBar(xpBarPercent)
                         }
+
+                        minXP = xpToCurrentLevel
+                        maxXp = xpToNextLevel
+                        binding.debugSeekbar.progress = xpBarPercent
                     }
                 }
             }
@@ -89,8 +97,10 @@ class CharacterSheetFragment : Fragment() {
 //                        val parent = binding.xpProgressBar.parent as FrameLayout
         binding.debugSeekbar.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
             override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
-                updateXpBar(p1)
+                val curCharXp = lerp(minXP, maxXp, p1)
+                viewModel.updateCharXp(curCharXp)
             }
+
 
             override fun onStartTrackingTouch(p0: SeekBar?) {
             }

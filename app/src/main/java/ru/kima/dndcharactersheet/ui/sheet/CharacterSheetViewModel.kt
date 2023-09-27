@@ -22,4 +22,9 @@ class CharacterSheetViewModel(
             _character.value = characterEntity
         }
     }
+
+    fun updateCharXp(curCharXp: Int)  {
+        val char = _character.value.copy(experiencePoints = curCharXp)
+        _character.value = char
+    }
 }

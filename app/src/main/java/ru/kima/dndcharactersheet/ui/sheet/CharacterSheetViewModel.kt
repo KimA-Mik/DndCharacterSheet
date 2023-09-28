@@ -15,6 +15,9 @@ class CharacterSheetViewModel(
 ) : ViewModel() {
     private val _character = MutableStateFlow(CharacterEntity())
     val character = _character.asStateFlow()
+    private val _tobBarState = MutableStateFlow(TopBarState.EXPANDED)
+    val topBarState = _tobBarState.asStateFlow()
+
     val dndUtilities = DndUtilities()
 
     fun loadCharacter(id: Int) = viewModelScope.launch(Dispatchers.IO) {
@@ -23,8 +26,23 @@ class CharacterSheetViewModel(
         }
     }
 
-    fun updateCharXp(curCharXp: Int)  {
+    fun updateCharXp(curCharXp: Int) {
         val char = _character.value.copy(experiencePoints = curCharXp)
         _character.value = char
+    }
+
+    fun onCollapseButtonClicked() {
+        val currentState = _tobBarState.value
+        _tobBarState.value = if (currentState == TopBarState.EXPANDED)
+            TopBarState.COLLAPSED
+        else
+            TopBarState.EXPANDED
+    }
+
+    companion object {
+        enum class TopBarState {
+            EXPANDED,
+            COLLAPSED
+        }
     }
 }

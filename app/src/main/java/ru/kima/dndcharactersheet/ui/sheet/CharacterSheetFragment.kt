@@ -10,7 +10,9 @@ import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import androidx.annotation.ColorInt
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.doOnLayout
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -21,6 +23,7 @@ import kotlinx.coroutines.launch
 import ru.kima.dndcharactersheet.R
 import ru.kima.dndcharactersheet.databinding.FragmentCharacterSheetBinding
 import ru.kima.dndcharactersheet.ui.factory
+import ru.kima.dndcharactersheet.util.GraphicUtils
 import kotlin.math.max
 
 
@@ -62,7 +65,6 @@ class CharacterSheetFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        updateXpBar(59)
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
@@ -117,8 +119,23 @@ class CharacterSheetFragment : Fragment() {
                         setHpColor(color)
                     }
                 }
+
+                launch {
+                    viewModel.topBarState.collect { state ->
+                        when (state) {
+                            CharacterSheetViewModel.Companion.TopBarState.EXPANDED ->
+                                setTopBarIsVisibleState(true)
+
+                            CharacterSheetViewModel.Companion.TopBarState.COLLAPSED ->
+                                setTopBarIsVisibleState(false)
+                        }
+                    }
+                }
             }
         }
+
+        binding.collapseButton.setOnClickListener { viewModel.onCollapseButtonClicked() }
+
 //                        val parent = binding.xpProgressBar.parent as FrameLayout
         binding.debugSeekbar.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
             override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
@@ -154,5 +171,33 @@ class CharacterSheetFragment : Fragment() {
         val background = binding.hpLayout.background
 //        background.mutate()
         background.setTint(color)
+    }
+
+    private fun setTopBarIsVisibleState(isVisible: Boolean) {
+        binding.characterNameTextView.isVisible = isVisible
+        binding.raceAndClassTextView.isVisible = isVisible
+        binding.experienceLayout.isVisible = isVisible
+        val newStringId = if (isVisible)
+            R.string.button_collapse
+        else
+            R.string.button_expand
+        binding.collapseButton.setText(newStringId)
+        var newDrawable =
+            AppCompatResources.getDrawable(requireContext(), R.drawable.ic_drop_arrow)!!
+
+        if (!isVisible)
+            newDrawable = GraphicUtils.rotateDrawable(newDrawable, 180f, resources)
+
+//        val animator = ObjectAnimator.ofPropertyValuesHolder(newDrawable, PropertyValuesHolder.ofFloat("rotation", 180f))
+//        animator.setTarget(drawable);
+//        animator.setDuration(2000);
+//        animator.start()
+
+        binding.collapseButton.setCompoundDrawablesRelativeWithIntrinsicBounds(
+            newDrawable,
+            null,
+            newDrawable,
+            null
+        )
     }
 }

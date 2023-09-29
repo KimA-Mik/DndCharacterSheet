@@ -23,6 +23,9 @@ import kotlinx.coroutines.launch
 import ru.kima.dndcharactersheet.R
 import ru.kima.dndcharactersheet.databinding.FragmentCharacterSheetBinding
 import ru.kima.dndcharactersheet.ui.factory
+import ru.kima.dndcharactersheet.ui.sheet.floating.DiceRollerFragment
+import ru.kima.dndcharactersheet.ui.sheet.pager.SheetPagerAdapter
+import ru.kima.dndcharactersheet.ui.sheet.pages.listeners.CharacteristicsAndAbilitiesListener
 import ru.kima.dndcharactersheet.util.GraphicUtils
 import kotlin.math.max
 
@@ -37,6 +40,9 @@ class CharacterSheetFragment : Fragment() {
     private val viewModel: CharacterSheetViewModel by viewModels() { factory() }
     private val args: CharacterSheetFragmentArgs by navArgs()
 
+    fun getCharacteristicsAndAbilitiesListener():
+            CharacteristicsAndAbilitiesListener = viewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.loadCharacter(args.characterId)
@@ -48,6 +54,8 @@ class CharacterSheetFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCharacterSheetBinding.inflate(layoutInflater, container, false)
+        val pagerAdapter = SheetPagerAdapter(this, args.characterId)
+        binding.elementPager.adapter = pagerAdapter
         return binding.root
     }
 
@@ -136,6 +144,10 @@ class CharacterSheetFragment : Fragment() {
 
         binding.collapseButton.setOnClickListener { viewModel.onCollapseButtonClicked() }
 
+        val diceRoller = binding.dieRollerContainer.getFragment<DiceRollerFragment>()
+        diceRoller.registerEvents(viewModel.rollEvent)
+
+
 //                        val parent = binding.xpProgressBar.parent as FrameLayout
         binding.debugSeekbar.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
             override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
@@ -184,9 +196,9 @@ class CharacterSheetFragment : Fragment() {
         binding.collapseButton.setText(newStringId)
         var newDrawable =
             AppCompatResources.getDrawable(requireContext(), R.drawable.ic_drop_arrow)!!
-
         if (!isVisible)
             newDrawable = GraphicUtils.rotateDrawable(newDrawable, 180f, resources)
+
 
 //        val animator = ObjectAnimator.ofPropertyValuesHolder(newDrawable, PropertyValuesHolder.ofFloat("rotation", 180f))
 //        animator.setTarget(drawable);

@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/action_text_view"
+            android:id="@+id/last_roll_type_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -42,7 +42,7 @@
             tools:text="БРОСОК" />
 
         <TextView
-            android:id="@+id/type_text_view"
+            android:id="@+id/last_roll_value_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -51,7 +51,7 @@
             android:textColor="?attr/colorOnSecondaryContainer"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toEndOf="@id/action_text_view"
+            app:layout_constraintStart_toEndOf="@id/last_roll_type_text_view"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="МУДРОСТИ" />
 
@@ -67,7 +67,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/action_text_view"
+            app:layout_constraintTop_toBottomOf="@id/last_roll_type_text_view"
             tools:text="(1+1)" />
 
         <TextView
@@ -87,9 +87,12 @@
             android:id="@+id/total_result_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toEndOf="@id/last_roll_value_text_view"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="2" />
     </androidx.constraintlayout.widget.ConstraintLayout>

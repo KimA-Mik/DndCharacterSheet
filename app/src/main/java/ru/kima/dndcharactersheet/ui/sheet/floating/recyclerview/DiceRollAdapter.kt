@@ -47,7 +47,8 @@ class DiceRollAdapter(private val listListener: RollListListener) :
                 val binding = holder.binding as ListItemLastRollBinding
                 binding.apply {
                     totalResultTextView.text = roll.sum.toString()
-                    actionTextView.text = "БРОСОК"
+                    lastRollValueTextView.setText(roll.value.strId)
+                    lastRollTypeTextView.setText(roll.type.strId)
                     resultsTextView.text = roll.results
                     diceTypeTextView.text = roll.dice
 
@@ -59,7 +60,8 @@ class DiceRollAdapter(private val listListener: RollListListener) :
                 val binding = holder.binding as ListItemPrevRollBinding
                 binding.apply {
                     totalResultTextView.text = roll.sum.toString()
-                    actionTextView.text = "БРОСОК"
+                    lastRollValueTextView.setText(roll.value.strId)
+                    lastRollTypeTextView.setText(roll.type.strId)
                 }
             }
         }

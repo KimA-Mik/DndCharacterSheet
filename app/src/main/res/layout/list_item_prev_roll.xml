@@ -19,16 +19,16 @@
         tools:text="43" />
 
     <TextView
-        android:id="@+id/action_text_view"
+        android:id="@+id/last_roll_type_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:textColor="?attr/colorOnSecondaryContainer"
         tools:text="БРОСОК" />
 
     <TextView
-        android:id="@+id/type_text_view"
+        android:id="@+id/last_roll_value_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

@@ -14,11 +14,14 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import ru.kima.dndcharactersheet.R
 import ru.kima.dndcharactersheet.databinding.FragmentDiceRollerBinding
+import ru.kima.dndcharactersheet.ui.sheet.event.EventRoll
 import ru.kima.dndcharactersheet.ui.sheet.floating.recyclerview.DiceRollAdapter
 import ru.kima.dndcharactersheet.ui.sheet.floating.recyclerview.DiceRollDiffCallback
+import ru.kima.dndcharactersheet.util.Event
 
 class DiceRollerFragment : Fragment() {
     private var _binding: FragmentDiceRollerBinding? = null
@@ -126,6 +129,20 @@ class DiceRollerFragment : Fragment() {
         binding.diceD100Button.setOnClickListener { viewModel.addDice(100) }
         binding.diceD100Button.setOnLongClickListener { viewModel.onRemoveDice(100) }
     }
+
+    fun registerEvents(event: StateFlow<Event<EventRoll?>>) =
+        lifecycleScope.launch {
+            event.collect {
+                it.getValue()?.let { roll ->
+                    viewModel.rollD20(
+                        roll.modifier,
+                        roll.type,
+                        roll.value
+                    )
+                }
+            }
+        }
+
 
     private fun updateTextViews(diceValues: Map<Int, Int>) {
         diceTextViews.forEach { (sides, view) ->

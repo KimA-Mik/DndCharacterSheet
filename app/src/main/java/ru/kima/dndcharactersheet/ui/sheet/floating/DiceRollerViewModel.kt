@@ -121,7 +121,7 @@ class DiceRollerViewModel : ViewModel(),
     private fun calculateDiceRoll(diceRoll: Map<Int, Int>, modifier: Int = 0): DiceRoll {
         val resSb = StringBuilder()
         val diceSb = StringBuilder()
-        var sum = 0
+        var sum = modifier
         diceRoll.forEach { (sides, count) ->
             if (count == 0) {
                 return@forEach

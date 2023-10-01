@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.launch
+import ru.kima.dndcharactersheet.R
 import ru.kima.dndcharactersheet.databinding.FragmentCharactersListBinding
 import ru.kima.dndcharactersheet.ui.characterslist.recyclerview.CharactersListAdapter
 import ru.kima.dndcharactersheet.ui.characterslist.recyclerview.CharactersListDiffCallback
@@ -83,5 +84,7 @@ class CharactersListFragment : Fragment() {
                 }
             }
         }
+
+        binding.toolbar.inflateMenu(R.menu.menu_cheracters_list)
     }
 }

@@ -27,5 +27,7 @@
 
     <string name="check_value_strength">STRENGTH</string>
     <string name="check_value_agility">AGILITY</string>
+    <string name="menu_item_search_title">Search</string>
+    <string name="menu_item_settings_title">Settings</string>
 
 </resources>

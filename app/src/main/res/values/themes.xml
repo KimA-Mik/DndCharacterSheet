@@ -50,8 +50,9 @@
     </style>
 
     <style name="Theme.DndCharacterSheet" parent="Base.Theme.DndCharacterSheet">
-        <!--        <item name="android:windowTranslucentStatus">true</item>-->
-        <!--        <item name="android:windowLightStatusBar">true</item>-->
+        <!--        Thanks to https://stackoverflow.com/a/70959630-->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="Base.Theme.DndCharacterSheet.Fab" parent="Base.Widget.Material3.FloatingActionButton">

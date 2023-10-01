@@ -48,4 +48,9 @@
         <item name="harmonizeXp">true</item>
         <item name="colorPrimaryInverse">@color/md_theme_dark_inversePrimary</item>
     </style>
+
+    <style name="Theme.DndCharacterSheet" parent="Base.Theme.DndCharacterSheet">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
 </resources>

@@ -55,6 +55,15 @@
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
+    <style name="Theme.DndCharacterSheet.Toolbar.Surface" parent="Widget.Material3.Toolbar.Surface">
+        <item name="elevation">4dp</item>
+    </style>
+
+    <style name="Theme.DndCharacterSheet.Popup" parent="Widget.Material3.PopupMenu">
+        <item name="background">@color/md_theme_light_surface</item>
+        <item name="android:popupElevation">4dp</item>
+    </style>
+
     <style name="Base.Theme.DndCharacterSheet.Fab" parent="Base.Widget.Material3.FloatingActionButton">
         <item name="android:paddingLeft">0dp</item>
         <item name="android:paddingRight">0dp</item>

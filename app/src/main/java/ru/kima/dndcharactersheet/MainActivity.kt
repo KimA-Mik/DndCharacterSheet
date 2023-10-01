@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         app.setActivity(this)
 
         //TODO: explore elevated colors dependency with xml colors
-        val color = SurfaceColors.SURFACE_0.getColor(this)
+        val color = SurfaceColors.SURFACE_2.getColor(this)
         window.statusBarColor = color
         window.navigationBarColor = color
     }

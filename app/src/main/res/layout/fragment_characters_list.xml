@@ -5,19 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Toolbar
+    <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
+        style="@style/Theme.DndCharacterSheet.Toolbar.Surface"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:actionMenuTextColor="?attr/colorOnSecondary"
-        android:background="?attr/colorSurface"
-        android:colorControlNormal="?attr/colorOnPrimary"
+        android:layout_height="wrap_content"
         android:elevation="4dp"
-        android:popupTheme="@style/ThemeOverlay.AppCompat.ActionBar"
-        android:titleTextColor="?attr/colorOnSurface"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/menu_characters_list" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/characters_recycler_view"

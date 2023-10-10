@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.launch
 import ru.kima.dndcharactersheet.databinding.FragmentCharactersListBinding
+import ru.kima.dndcharactersheet.ui.characterslist.menu.CharacterListMenuProvider
 import ru.kima.dndcharactersheet.ui.characterslist.recyclerview.CharactersListAdapter
 import ru.kima.dndcharactersheet.ui.characterslist.recyclerview.CharactersListDiffCallback
 import ru.kima.dndcharactersheet.ui.characterslist.recyclerview.SwipeCallback
@@ -83,5 +85,17 @@ class CharactersListFragment : Fragment() {
                 }
             }
         }
+
+        val menuProvider = CharacterListMenuProvider(viewModel)
+        binding.charactersListSearchView
+            .editText.addTextChangedListener { text ->
+                text?.toString()?.let { viewModel.onQuery(it) }
+            }
+
+        binding.charactersListSearchBar.addMenuProvider(
+            menuProvider,
+            viewLifecycleOwner,
+            Lifecycle.State.STARTED
+        )
     }
 }

@@ -3,7 +3,6 @@ package ru.kima.dndcharactersheet
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentContainerView
-import com.google.android.material.elevation.SurfaceColors
 import ru.kima.dndcharactersheet.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -20,9 +19,9 @@ class MainActivity : AppCompatActivity() {
         app.setActivity(this)
 
         //TODO: explore elevated colors dependency with xml colors
-        val color = SurfaceColors.SURFACE_2.getColor(this)
-        window.statusBarColor = color
-        window.navigationBarColor = color
+//        val color = SurfaceColors.SURFACE_2.getColor(this)
+//        window.statusBarColor = color
+//        window.navigationBarColor = color
     }
 
     override fun onDestroy() {

@@ -8,13 +8,15 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import ru.kima.dndcharactersheet.data.entities.CharacterEntity
 import ru.kima.dndcharactersheet.model.CharactersDatabaseService
+import ru.kima.dndcharactersheet.ui.characterslist.menu.CharacterListMenuListener
 import ru.kima.dndcharactersheet.ui.characterslist.recyclerview.SwipeListener
 import ru.kima.dndcharactersheet.util.Event
 
 class CharacterListViewModel(private val database: CharactersDatabaseService) :
     ViewModel(),
     CharacterListListener,
-    SwipeListener {
+    SwipeListener,
+    CharacterListMenuListener {
 
     private val _showSheet = MutableStateFlow<Event<Int?>>(Event(null))
     val showSheet = _showSheet.asStateFlow()
@@ -41,6 +43,7 @@ class CharacterListViewModel(private val database: CharactersDatabaseService) :
             armorClass = 14
         )
     )
+    private var allCharacters = emptyList<CharacterEntity>()
     private val _characters = MutableStateFlow(charactersList)
     val characters = _characters.asStateFlow()
 
@@ -70,8 +73,8 @@ class CharacterListViewModel(private val database: CharactersDatabaseService) :
     }
 
     private suspend fun loadCharacters() {
-        val characters = database.getAllCharacters()
-        _characters.value = characters
+        allCharacters = database.getAllCharacters()
+        _characters.value = allCharacters
     }
 
     override fun onItemDismiss(position: Int) {
@@ -80,5 +83,17 @@ class CharacterListViewModel(private val database: CharactersDatabaseService) :
             database.deleteCharacterById(elementId)
             loadCharacters()
         }
+    }
+
+    fun onQuery(query: String) {
+        if (query.isEmpty()) {
+            _characters.value = allCharacters
+            return
+        }
+        _characters.value = allCharacters.filter { it.name.contains(query, true) }
+    }
+
+    override fun onOpenSetting() {
+
     }
 }

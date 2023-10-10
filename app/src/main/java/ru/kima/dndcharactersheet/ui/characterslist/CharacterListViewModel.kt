@@ -6,20 +6,24 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import ru.kima.dndcharactersheet.data.entities.CharacterEntity
 import ru.kima.dndcharactersheet.model.CharactersDatabaseService
 import ru.kima.dndcharactersheet.ui.characterslist.menu.CharacterListMenuListener
 import ru.kima.dndcharactersheet.ui.characterslist.recyclerview.SwipeListener
 import ru.kima.dndcharactersheet.util.Event
 
-class CharacterListViewModel(private val database: CharactersDatabaseService) :
+class CharacterListViewModel :
     ViewModel(),
+    KoinComponent,
     CharacterListListener,
     SwipeListener,
     CharacterListMenuListener {
 
     private val _showSheet = MutableStateFlow<Event<Int?>>(Event(null))
     val showSheet = _showSheet.asStateFlow()
+    private val database: CharactersDatabaseService by inject()
 
     private val charactersList = listOf(
         CharacterEntity(

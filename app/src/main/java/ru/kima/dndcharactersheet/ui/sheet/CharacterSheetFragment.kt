@@ -22,7 +22,6 @@ import androidx.navigation.fragment.navArgs
 import kotlinx.coroutines.launch
 import ru.kima.dndcharactersheet.R
 import ru.kima.dndcharactersheet.databinding.FragmentCharacterSheetBinding
-import ru.kima.dndcharactersheet.ui.factory
 import ru.kima.dndcharactersheet.ui.sheet.floating.DiceRollerFragment
 import ru.kima.dndcharactersheet.ui.sheet.pager.SheetPagerAdapter
 import ru.kima.dndcharactersheet.ui.sheet.pages.listeners.CharacteristicsAndAbilitiesListener
@@ -37,7 +36,7 @@ class CharacterSheetFragment : Fragment() {
             "Cannot access binding because it is null. Is the view visible?"
         }
 
-    private val viewModel: CharacterSheetViewModel by viewModels() { factory() }
+    private val viewModel: CharacterSheetViewModel by viewModels()
     private val args: CharacterSheetFragmentArgs by navArgs()
 
     fun getCharacteristicsAndAbilitiesListener():

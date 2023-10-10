@@ -38,10 +38,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun applyPreferences() {
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
         val pref = PreferenceManager.getDefaultSharedPreferences(this).all
         val darkThemeKey = getString(R.string.dark_theme_preference_key)
         val darkTheme = pref[darkThemeKey].toString().toInt()
-        println(darkTheme)
+
         if (SDK_INT < 31) {
             when (darkTheme) {
                 -1 -> setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)

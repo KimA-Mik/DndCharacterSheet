@@ -1,6 +1,5 @@
 package ru.kima.dndcharactersheet.ui.characterslist.menu
 
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -18,7 +17,6 @@ class CharacterListMenuProvider(
         return when (menuItem.itemId) {
             R.id.menu_item_settings -> {
                 listener.onOpenSetting()
-                Log.d("213", "213")
                 true
             }
 

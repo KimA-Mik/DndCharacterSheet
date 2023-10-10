@@ -74,11 +74,17 @@ class CharactersListFragment : Fragment() {
                     }
                 }
                 launch {
-                    viewModel.showSheet.collect { navEvent ->
-                        navEvent.getValue()?.let { charId ->
-                            findNavController().navigate(
-                                CharactersListFragmentDirections.showCharacterSheet(charId)
-                            )
+                    viewModel.navigationEvent.collect { navEvent ->
+                        when (navEvent) {
+                            is NavigationEvent.Settings ->
+                                findNavController().navigate(
+                                    CharactersListFragmentDirections.showSettings()
+                                )
+
+                            is NavigationEvent.ShowSheet ->
+                                findNavController().navigate(
+                                    CharactersListFragmentDirections.showCharacterSheet(navEvent.data)
+                                )
                         }
                     }
                 }

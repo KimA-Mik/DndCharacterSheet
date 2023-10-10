@@ -3,7 +3,9 @@ package ru.kima.dndcharactersheet.ui.characterslist
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
@@ -12,7 +14,6 @@ import ru.kima.dndcharactersheet.data.entities.CharacterEntity
 import ru.kima.dndcharactersheet.model.CharactersDatabaseService
 import ru.kima.dndcharactersheet.ui.characterslist.menu.CharacterListMenuListener
 import ru.kima.dndcharactersheet.ui.characterslist.recyclerview.SwipeListener
-import ru.kima.dndcharactersheet.util.Event
 
 class CharacterListViewModel :
     ViewModel(),
@@ -21,8 +22,8 @@ class CharacterListViewModel :
     SwipeListener,
     CharacterListMenuListener {
 
-    private val _showSheet = MutableStateFlow<Event<Int?>>(Event(null))
-    val showSheet = _showSheet.asStateFlow()
+    private val _navigationEvent = MutableSharedFlow<NavigationEvent>()
+    val navigationEvent = _navigationEvent.asSharedFlow()
     private val database: CharactersDatabaseService by inject()
 
     private val charactersList = listOf(
@@ -73,7 +74,9 @@ class CharacterListViewModel :
     }
 
     override fun onListItemClicked(charId: Int) {
-        _showSheet.value = Event(charId)
+        viewModelScope.launch {
+            _navigationEvent.emit(NavigationEvent.ShowSheet(charId))
+        }
     }
 
     private suspend fun loadCharacters() {
@@ -98,6 +101,8 @@ class CharacterListViewModel :
     }
 
     override fun onOpenSetting() {
-
+        viewModelScope.launch {
+            _navigationEvent.emit(NavigationEvent.Settings())
+        }
     }
 }

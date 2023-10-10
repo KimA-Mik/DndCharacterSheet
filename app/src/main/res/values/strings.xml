@@ -27,9 +27,13 @@
 
     <string name="check_value_strength">STRENGTH</string>
     <string name="check_value_agility">AGILITY</string>
+
     <string name="menu_item_search_title">Search</string>
     <string name="menu_item_settings_title">Settings</string>
     <string name="characters_list_search_bar_hint">Search hero</string>
     <string name="create_character_fab_content_description">Add character</string>
+
+    <string name="dark_theme_preference_key">dark_theme_preference</string>
+    <string name="preference_category_appearance">Appearance</string>
 
 </resources>

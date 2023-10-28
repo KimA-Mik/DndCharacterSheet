@@ -11,6 +11,7 @@ import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import androidx.annotation.ColorInt
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.view.doOnLayout
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -185,7 +186,7 @@ class CharacterSheetFragment : Fragment() {
     }
 
     private fun setTopBarIsVisibleState(isVisible: Boolean) {
-        binding.characterNameTextView.isVisible = isVisible
+//        binding.characterNameTextView.isVisible = isVisible
         binding.raceAndClassTextView.isVisible = isVisible
         binding.experienceLayout.isVisible = isVisible
         val newStringId = if (isVisible)
@@ -210,5 +211,40 @@ class CharacterSheetFragment : Fragment() {
             newDrawable,
             null
         )
+
+        val constraintSet = ConstraintSet()
+        constraintSet.clone(binding.topLayout)
+        if (isVisible) {
+            constraintSet.connect(
+                binding.armorButton.id,
+                ConstraintSet.TOP,
+                binding.experienceLayout.id,
+                ConstraintSet.BOTTOM,
+                16
+            )
+            constraintSet.connect(
+                binding.hpLayout.id,
+                ConstraintSet.TOP,
+                binding.experienceLayout.id,
+                ConstraintSet.BOTTOM,
+                16
+            )
+        } else {
+            constraintSet.connect(
+                binding.armorButton.id,
+                ConstraintSet.TOP,
+                ConstraintSet.PARENT_ID,
+                ConstraintSet.TOP,
+                16
+            )
+            constraintSet.connect(
+                binding.hpLayout.id,
+                ConstraintSet.TOP,
+                ConstraintSet.PARENT_ID,
+                ConstraintSet.TOP,
+                16
+            )
+        }
+        constraintSet.applyTo(binding.topLayout)
     }
 }

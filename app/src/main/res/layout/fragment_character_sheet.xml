@@ -36,6 +36,7 @@
             android:id="@+id/character_name_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
             android:textColor="?attr/colorOnPrimaryContainer"
             app:layout_constraintEnd_toEndOf="parent"
@@ -47,6 +48,7 @@
             android:id="@+id/race_and_class_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
             android:textColor="?attr/colorOnPrimaryContainer"
             app:layout_constraintEnd_toEndOf="parent"
@@ -199,6 +201,7 @@
             tools:ignore="RtlHardcoded" />
 
         <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/left_collapse_divider"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -209,6 +212,7 @@
             app:layout_constraintTop_toTopOf="@id/collapse_button" />
 
         <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/right_collapse_divider"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
@@ -219,6 +223,7 @@
             app:layout_constraintTop_toTopOf="@id/collapse_button" />
 
         <Spinner
+            android:id="@+id/some_spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"

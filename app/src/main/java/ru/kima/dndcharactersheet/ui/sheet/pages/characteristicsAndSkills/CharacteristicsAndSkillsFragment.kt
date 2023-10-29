@@ -23,7 +23,7 @@ class CharacteristicsAndSkillsFragment : Fragment() {
         }
 
     private val viewModel: CharacteristicsAndSkillsViewModel by viewModels { factory() }
-    private val adapter: CharacteristicsAdapter by lazy { CharacteristicsAdapter() }
+    private val adapter: CharacteristicsAdapter by lazy { CharacteristicsAdapter(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater,

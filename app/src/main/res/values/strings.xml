@@ -19,8 +19,8 @@
     <string name="button_collapse">COLLAPSE</string>
     <string name="button_expand">EXPAND</string>
 
-    <string name="characteristics_and_abilities">Characteristics and abilities</string>
-    <string name="attacks_and_skills">Attacks and skills</string>
+    <string name="characteristics_and_abilities">Characteristics and skills</string>
+    <string name="attacks_and_skills">Attacks and abilities</string>
 
     <string name="roll_type_roll">ROLL</string>
     <string name="roll_type_check">CHECK</string>
@@ -34,6 +34,9 @@
     <string name="characteristic_intelligence">INTELLIGENCE</string>
     <string name="characteristic_wisdom">WISDOM</string>
     <string name="characteristic_charisma">CHARISMA</string>
+
+    <string name="skill_athletics">ATHLETICS</string>
+    <string name="skill_acrobatics">ACROBATICS</string>
 
     <string name="menu_item_search_title">Search</string>
     <string name="menu_item_settings_title">Settings</string>

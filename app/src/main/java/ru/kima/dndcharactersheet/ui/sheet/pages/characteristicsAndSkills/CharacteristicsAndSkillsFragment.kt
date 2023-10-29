@@ -1,4 +1,4 @@
-package ru.kima.dndcharactersheet.ui.sheet.pages.characteristicsAndAbilities
+package ru.kima.dndcharactersheet.ui.sheet.pages.characteristicsAndSkills
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,25 +9,31 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.launch
-import ru.kima.dndcharactersheet.databinding.PageCharacteristicsAndAbilitiesBinding
+import ru.kima.dndcharactersheet.databinding.PageCharacteristicsAndSkillsBinding
 import ru.kima.dndcharactersheet.ui.factory
+import ru.kima.dndcharactersheet.ui.sheet.pages.characteristicsAndSkills.recyclerView.CharacteristicsAdapter
 
-class CharacteristicsAndAbilitiesFragment : Fragment() {
-    private var _binding: PageCharacteristicsAndAbilitiesBinding? = null
+class CharacteristicsAndSkillsFragment : Fragment() {
+    private var _binding: PageCharacteristicsAndSkillsBinding? = null
     private val binding
         get() = checkNotNull(_binding) {
             "Cannot access binding because it is null. Is the view visible?"
         }
 
-    private val viewModel: CharacteristicsAndAbilitiesViewModel by viewModels { factory() }
+    private val viewModel: CharacteristicsAndSkillsViewModel by viewModels { factory() }
+    private val adapter: CharacteristicsAdapter by lazy { CharacteristicsAdapter() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = PageCharacteristicsAndAbilitiesBinding.inflate(layoutInflater, container, false)
+        _binding = PageCharacteristicsAndSkillsBinding.inflate(layoutInflater, container, false)
+        binding.characteristicsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.characteristicsRecyclerView.adapter = adapter
+        adapter.characteristics = viewModel.characteristics
         return binding.root
     }
 
@@ -43,7 +49,7 @@ class CharacteristicsAndAbilitiesFragment : Fragment() {
 
             }
         }
-        binding.button.setOnClickListener { viewModel.roll() }
+//        binding.button.setOnClickListener { viewModel.roll() }
     }
 
 }

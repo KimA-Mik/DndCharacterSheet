@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import ru.kima.dndcharactersheet.App
 import ru.kima.dndcharactersheet.ui.sheet.CharacterSheetFragment
-import ru.kima.dndcharactersheet.ui.sheet.pages.characteristicsAndAbilities.CharacteristicsAndAbilitiesViewModel
+import ru.kima.dndcharactersheet.ui.sheet.pages.characteristicsAndSkills.CharacteristicsAndSkillsViewModel
 
 class ViewModelFactory(
     private val app: App
@@ -15,12 +15,12 @@ class ViewModelFactory(
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         val viewModel = when (modelClass) {
-            CharacteristicsAndAbilitiesViewModel::class.java -> {
+            CharacteristicsAndSkillsViewModel::class.java -> {
                 val fragment = app.activity.fragmentContainerView
                     .getFragment<NavHostFragment>().childFragmentManager
                     .fragments[0] as CharacterSheetFragment
                 val listener = fragment.getCharacteristicsAndAbilitiesListener()
-                CharacteristicsAndAbilitiesViewModel(listener)
+                CharacteristicsAndSkillsViewModel(listener)
             }
 
             else -> {

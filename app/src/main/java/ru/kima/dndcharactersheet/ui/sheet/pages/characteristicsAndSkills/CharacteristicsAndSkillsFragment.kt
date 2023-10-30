@@ -38,8 +38,12 @@ class CharacteristicsAndSkillsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = PageCharacteristicsAndSkillsBinding.inflate(layoutInflater, container, false)
-        binding.characteristicsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        binding.characteristicsRecyclerView.adapter = adapter
+        binding.apply {
+            characteristicsRecyclerView.layoutManager =
+                LinearLayoutManager(requireContext())
+            characteristicsRecyclerView.adapter = adapter
+            characteristicsRecyclerView.itemAnimator = null
+        }
         return binding.root
     }
 

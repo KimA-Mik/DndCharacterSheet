@@ -71,7 +71,6 @@ class CharacteristicsAndSkillsViewModel(
         )
     }
 
-    //TODO: Fix visible redraw of all skills
     override fun onSelect(skillType: SkillType) {
         val newList = mutableListOf<Characteristic>()
         val index = reverseIndex[skillType]

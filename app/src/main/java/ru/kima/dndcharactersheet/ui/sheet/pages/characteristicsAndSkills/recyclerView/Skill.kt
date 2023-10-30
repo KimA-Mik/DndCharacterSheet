@@ -4,5 +4,6 @@ import ru.kima.dndcharactersheet.ui.sheet.pages.characteristicsAndSkills.recycle
 
 data class Skill(
     val type: SkillType,
+    val modifier: Int,
     val level: Int
 )

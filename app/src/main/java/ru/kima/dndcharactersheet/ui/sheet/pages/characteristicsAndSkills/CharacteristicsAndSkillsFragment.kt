@@ -9,11 +9,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.launch
 import ru.kima.dndcharactersheet.databinding.PageCharacteristicsAndSkillsBinding
 import ru.kima.dndcharactersheet.ui.factory
 import ru.kima.dndcharactersheet.ui.sheet.pages.characteristicsAndSkills.recyclerView.CharacteristicsAdapter
+import ru.kima.dndcharactersheet.ui.sheet.pages.characteristicsAndSkills.recyclerView.CharacteristicsDiffCallback
 
 class CharacteristicsAndSkillsFragment : Fragment() {
     private var _binding: PageCharacteristicsAndSkillsBinding? = null
@@ -23,7 +25,12 @@ class CharacteristicsAndSkillsFragment : Fragment() {
         }
 
     private val viewModel: CharacteristicsAndSkillsViewModel by viewModels { factory() }
-    private val adapter: CharacteristicsAdapter by lazy { CharacteristicsAdapter(requireContext()) }
+    private val adapter: CharacteristicsAdapter by lazy {
+        CharacteristicsAdapter(
+            requireContext(),
+            viewModel
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,7 +40,6 @@ class CharacteristicsAndSkillsFragment : Fragment() {
         _binding = PageCharacteristicsAndSkillsBinding.inflate(layoutInflater, container, false)
         binding.characteristicsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.characteristicsRecyclerView.adapter = adapter
-        adapter.characteristics = viewModel.characteristics
         return binding.root
     }
 
@@ -46,7 +52,15 @@ class CharacteristicsAndSkillsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-
+                launch {
+                    viewModel.characteristic.collect { characteristics ->
+                        val diffCallback =
+                            CharacteristicsDiffCallback(adapter.characteristics, characteristics)
+                        val diff = DiffUtil.calculateDiff(diffCallback)
+                        adapter.characteristics = characteristics
+                        diff.dispatchUpdatesTo(adapter)
+                    }
+                }
             }
         }
 //        binding.button.setOnClickListener { viewModel.roll() }

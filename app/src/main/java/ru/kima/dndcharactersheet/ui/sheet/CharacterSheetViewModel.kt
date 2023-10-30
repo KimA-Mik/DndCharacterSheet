@@ -70,4 +70,10 @@ class CharacterSheetViewModel() :
             _rollEvent.emit(eventRoll)
         }
     }
+
+    override fun onRollEvent(roll: EventRoll) {
+        viewModelScope.launch {
+            _rollEvent.emit(roll)
+        }
+    }
 }

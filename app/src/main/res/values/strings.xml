@@ -37,6 +37,8 @@
 
     <string name="skill_athletics">ATHLETICS</string>
     <string name="skill_acrobatics">ACROBATICS</string>
+    <string name="check_skill_athletics">OF ATHLETICS</string>
+    <string name="check_skill_acrobatics">OF ACROBATICS</string>
 
     <string name="menu_item_search_title">Search</string>
     <string name="menu_item_settings_title">Settings</string>

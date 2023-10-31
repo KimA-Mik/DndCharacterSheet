@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.kima.dndcharactersheet.databinding.ListItemCharacteristicBinding
 import ru.kima.dndcharactersheet.ui.sheet.pages.characteristicsAndSkills.recyclerView.skills.SkillView
 import ru.kima.dndcharactersheet.ui.sheet.pages.characteristicsAndSkills.recyclerView.skills.SkillViewListener
-import ru.kima.dndcharactersheet.util.Math.toSignedString
 
 class CharacteristicsAdapter(
     private val parentContext: Context,
@@ -27,7 +26,7 @@ class CharacteristicsAdapter(
         val characteristic = characteristics[position]
         holder.binding.apply {
             characteristicNameTextView.setText(characteristic.type.titleId)
-            characteristicValueTextView.text = toSignedString(characteristic.value)
+            characteristicValueTextView.text = characteristic.value.toString()
             skillsContainer.removeAllViewsInLayout()
 
             for (skill in characteristic.skills) {

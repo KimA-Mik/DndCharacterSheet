@@ -4,8 +4,7 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import ru.kima.dndcharactersheet.ui.sheet.event.RollType
-import ru.kima.dndcharactersheet.ui.sheet.event.RollValue
+import ru.kima.dndcharactersheet.ui.sheet.event.EventRoll
 import ru.kima.dndcharactersheet.ui.sheet.floating.recyclerview.DiceRoll
 import ru.kima.dndcharactersheet.ui.sheet.floating.recyclerview.RollListListener
 import kotlin.math.abs
@@ -87,7 +86,7 @@ class DiceRollerViewModel : ViewModel(),
         return true
     }
 
-    fun rollD20(modifier: Int, type: RollType, value: RollValue) {
+    fun rollD20(modifier: Int, type: EventRoll.Type, value: EventRoll.Value) {
         val d20 = mapOf(20 to 1)
         val roll = calculateDiceRoll(d20, modifier)
             .copy(
@@ -164,7 +163,7 @@ class DiceRollerViewModel : ViewModel(),
         return DiceRoll(
             sum,
             resSb.toString(), diceSb.toString(),
-            RollType.NONE, RollValue.NONE
+            EventRoll.Type.NONE, EventRoll.Value.NONE
         )
     }
 

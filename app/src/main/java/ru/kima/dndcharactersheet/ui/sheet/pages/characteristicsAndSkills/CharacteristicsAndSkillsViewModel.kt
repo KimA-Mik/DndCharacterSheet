@@ -10,11 +10,8 @@ import org.koin.core.component.inject
 import ru.kima.dndcharactersheet.dnd.DndUtilities
 import ru.kima.dndcharactersheet.model.CharactersDatabaseService
 import ru.kima.dndcharactersheet.ui.sheet.event.EventRoll
-import ru.kima.dndcharactersheet.ui.sheet.event.RollType
-import ru.kima.dndcharactersheet.ui.sheet.event.RollValue
 import ru.kima.dndcharactersheet.ui.sheet.pages.characteristicsAndSkills.recyclerView.Characteristic
 import ru.kima.dndcharactersheet.ui.sheet.pages.characteristicsAndSkills.recyclerView.Skill
-import ru.kima.dndcharactersheet.ui.sheet.pages.characteristicsAndSkills.recyclerView.skills.SkillType
 import ru.kima.dndcharactersheet.ui.sheet.pages.characteristicsAndSkills.recyclerView.skills.SkillViewListener
 import ru.kima.dndcharactersheet.ui.sheet.pages.listeners.CharacteristicsAndAbilitiesListener
 
@@ -27,24 +24,52 @@ class CharacteristicsAndSkillsViewModel(
     private val characteristicsList = listOf(
         Characteristic(
             Characteristic.Type.STRENGTH, 19, listOf(
-                Skill(SkillType.ATHLETICS, dndUtilities.getCharacteristicsModifier(19), 1),
-                Skill(SkillType.ACROBATICS, dndUtilities.getCharacteristicsModifier(19), 2)
+                Skill(Skill.Type.ATHLETICS, dndUtilities.getCharacteristicsModifier(19), 1)
+            )
+        ),
+        Characteristic(
+            Characteristic.Type.DEXTERITY, 20, listOf(
+                Skill(Skill.Type.ACROBATICS, dndUtilities.getCharacteristicsModifier(20), 2),
+                Skill(Skill.Type.SLEIGHT_OF_HAND, dndUtilities.getCharacteristicsModifier(20), 0),
+                Skill(Skill.Type.STEALTH, dndUtilities.getCharacteristicsModifier(20), 0),
             )
         ),
         Characteristic(Characteristic.Type.CONSTITUTION, 15, emptyList()),
-        Characteristic(Characteristic.Type.DEXTERITY, 20, emptyList()),
-        Characteristic(Characteristic.Type.INTELLIGENCE, 8, emptyList()),
-        Characteristic(Characteristic.Type.WISDOM, 3, emptyList()),
-        Characteristic(Characteristic.Type.CHARISMA, 0, emptyList())
+        Characteristic(
+            Characteristic.Type.INTELLIGENCE, 8, listOf(
+                Skill(Skill.Type.ARCANA, dndUtilities.getCharacteristicsModifier(8), 0),
+                Skill(Skill.Type.HISTORY, dndUtilities.getCharacteristicsModifier(8), 0),
+                Skill(Skill.Type.INVESTIGATION, dndUtilities.getCharacteristicsModifier(8), 0),
+                Skill(Skill.Type.NATURE, dndUtilities.getCharacteristicsModifier(8), 0),
+                Skill(Skill.Type.RELIGION, dndUtilities.getCharacteristicsModifier(8), 0),
+            )
+        ),
+        Characteristic(
+            Characteristic.Type.WISDOM, 3, listOf(
+                Skill(Skill.Type.ANIMAL_HANDLING, dndUtilities.getCharacteristicsModifier(3), 0),
+                Skill(Skill.Type.INSIGHT, dndUtilities.getCharacteristicsModifier(3), 0),
+                Skill(Skill.Type.MEDICINE, dndUtilities.getCharacteristicsModifier(3), 0),
+                Skill(Skill.Type.PERCEPTION, dndUtilities.getCharacteristicsModifier(3), 0),
+                Skill(Skill.Type.SURVIVAL, dndUtilities.getCharacteristicsModifier(3), 0),
+            )
+        ),
+        Characteristic(
+            Characteristic.Type.CHARISMA, 0, listOf(
+                Skill(Skill.Type.DECEPTION, dndUtilities.getCharacteristicsModifier(0), 0),
+                Skill(Skill.Type.INTIMIDATION, dndUtilities.getCharacteristicsModifier(0), 0),
+                Skill(Skill.Type.PERFORMANCE, dndUtilities.getCharacteristicsModifier(0), 0),
+                Skill(Skill.Type.PERSUASION, dndUtilities.getCharacteristicsModifier(0), 0),
+            )
+        )
     )
 
     private val _characteristics = MutableStateFlow(characteristicsList)
     val characteristic = _characteristics.asStateFlow()
 
-    private val reverseIndex: Map<SkillType, Pair<Int, Int>>
+    private val reverseIndex: Map<Skill.Type, Pair<Int, Int>>
 
     init {
-        val indexMap = mutableMapOf<SkillType, Pair<Int, Int>>()
+        val indexMap = mutableMapOf<Skill.Type, Pair<Int, Int>>()
         for (i in _characteristics.value.indices) {
             val char = _characteristics.value[i]
             for (j in char.skills.indices) {
@@ -56,22 +81,22 @@ class CharacteristicsAndSkillsViewModel(
     }
 
     fun roll() = viewModelScope.launch {
-        listener.onRoll(RollType.CHECK, RollValue.STRENGTH)
+        listener.onRoll(EventRoll.Type.CHECK, EventRoll.Value.STRENGTH)
     }
 
-    override fun onRoll(skillType: SkillType) {
+    override fun onRoll(skillType: Skill.Type) {
         val index = reverseIndex[skillType]
         val characteristicIndex = index!!.first
         val skillIndex = index.second
         val skill = _characteristics.value[characteristicIndex].skills[skillIndex]
         listener.onRollEvent(
             EventRoll.fromSkillType(
-                RollType.CHECK, skillType, skill.modifier + skill.level * 3
+                EventRoll.Type.CHECK, skillType, skill.modifier + skill.level * 3
             )
         )
     }
 
-    override fun onSelect(skillType: SkillType) {
+    override fun onSelect(skillType: Skill.Type) {
         val newList = mutableListOf<Characteristic>()
         val index = reverseIndex[skillType]
         val characteristicIndex = index!!.first

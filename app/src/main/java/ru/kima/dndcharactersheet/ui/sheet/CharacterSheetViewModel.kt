@@ -14,8 +14,6 @@ import ru.kima.dndcharactersheet.data.entities.CharacterEntity
 import ru.kima.dndcharactersheet.dnd.DndUtilities
 import ru.kima.dndcharactersheet.model.CharactersDatabaseService
 import ru.kima.dndcharactersheet.ui.sheet.event.EventRoll
-import ru.kima.dndcharactersheet.ui.sheet.event.RollType
-import ru.kima.dndcharactersheet.ui.sheet.event.RollValue
 import ru.kima.dndcharactersheet.ui.sheet.pages.listeners.CharacteristicsAndAbilitiesListener
 import kotlin.random.Random
 
@@ -60,7 +58,7 @@ class CharacterSheetViewModel() :
         }
     }
 
-    override fun onRoll(type: RollType, value: RollValue) {
+    override fun onRoll(type: EventRoll.Type, value: EventRoll.Value) {
         viewModelScope.launch {
             val eventRoll = EventRoll(
                 type,

@@ -43,6 +43,118 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="19" />
 
+    <FrameLayout
+        android:id="@+id/check_text_view_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/layout_check_text_background"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        app:layout_constraintBottom_toBottomOf="@id/characteristic_check_button"
+        app:layout_constraintEnd_toStartOf="@id/save_throw_text_view_container"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/characteristic_check_button">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/roll_type_check"
+            android:textColor="?attr/colorOnSurface" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/characteristic_check_button"
+        android:layout_width="@dimen/roll_button_width"
+        android:layout_height="@dimen/roll_button_height"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/layout_check_button_background"
+        app:layout_constraintEnd_toEndOf="@id/check_text_view_container"
+        app:layout_constraintTop_toBottomOf="@id/characteristic_name_text_view">
+
+        <TextView
+            android:id="@+id/characteristic_check_modifier_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+            android:textColor="?attr/colorOnPrimaryContainer"
+            tools:text="+4" />
+    </FrameLayout>
+
+
+    <FrameLayout
+        android:id="@+id/save_throw_text_view_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/layout_check_text_background"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        app:layout_constraintBottom_toBottomOf="@id/save_throw_check_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/check_text_view_container"
+        app:layout_constraintTop_toTopOf="@id/save_throw_check_button">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/roll_type_save_throw"
+            android:textColor="?attr/colorOnSurface" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/save_throw_check_box"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        app:layout_constraintBottom_toBottomOf="@id/save_throw_text_view_container"
+        app:layout_constraintEnd_toStartOf="@id/save_throw_text_view_container"
+        app:layout_constraintStart_toStartOf="@id/save_throw_text_view_container"
+        app:layout_constraintTop_toTopOf="@id/save_throw_text_view_container">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:importantForAccessibility="no"
+            android:src="@drawable/drawable_save_throw_check_none" />
+
+        <ImageView
+            android:id="@+id/save_throw_check_box_dot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:importantForAccessibility="no"
+            android:src="@drawable/drawable_save_throw_check_one" />
+    </FrameLayout>
+
+
+    <FrameLayout
+
+        android:id="@+id/save_throw_check_button"
+        android:layout_width="@dimen/roll_button_width"
+        android:layout_height="@dimen/roll_button_height"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/layout_check_button_background"
+        app:layout_constraintEnd_toEndOf="@id/save_throw_text_view_container"
+        app:layout_constraintTop_toBottomOf="@id/characteristic_name_text_view">
+
+        <TextView
+            android:id="@+id/save_throw_check_modifier_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+            android:textColor="?attr/colorOnPrimaryContainer"
+            tools:text="+4" />
+    </FrameLayout>
+
     <LinearLayout
         android:id="@+id/skills_container"
         android:layout_width="match_parent"
@@ -50,7 +162,7 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/characteristic_name_text_view" />
+        app:layout_constraintTop_toBottomOf="@id/characteristic_check_button" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 package ru.kima.dndcharactersheet.ui.sheet.event
 
 import ru.kima.dndcharactersheet.R
+import ru.kima.dndcharactersheet.ui.sheet.pages.characteristicsAndSkills.recyclerView.Characteristic
 import ru.kima.dndcharactersheet.ui.sheet.pages.characteristicsAndSkills.recyclerView.Skill
 
 data class EventRoll(
@@ -10,15 +11,20 @@ data class EventRoll(
 ) {
     enum class Type(val strId: Int) {
         NONE(R.string.roll_type_roll),
-        CHECK(R.string.roll_type_check)
+        CHECK(R.string.roll_type_check),
+        SAVE_THROW(R.string.roll_type_save_throw)
     }
 
     enum class Value(val strId: Int) {
         NONE(R.string.empty),
 
         //CHARACTERISTICS
-        STRENGTH(R.string.check_value_strength),
-        AGILITY(R.string.check_value_agility),
+        STRENGTH(R.string.check_characteristic_strength),
+        DEXTERITY(R.string.check_characteristic_dexterity),
+        CONSTITUTION(R.string.check_characteristic_constitution),
+        INTELLIGENCE(R.string.check_characteristic_intelligence),
+        WISDOM(R.string.check_characteristic_wisdom),
+        CHARISMA(R.string.check_characteristic_charisma),
 
         //SKILLS
         ATHLETICS(R.string.check_skill_athletics),
@@ -45,16 +51,28 @@ data class EventRoll(
         fun fromSkillType(rollType: Type, skillType: Skill.Type, modifier: Int): EventRoll {
             return EventRoll(
                 type = rollType,
-                value = skillToEvent[skillType]!!,
+                value = skillToValue[skillType]!!,
+                modifier
+            )
+        }
+
+        fun fromCharacteristicType(
+            rollType: Type,
+            characteristicType: Characteristic.Type,
+            modifier: Int
+        ): EventRoll {
+            return EventRoll(
+                type = rollType,
+                value = characteristicToValue[characteristicType]!!,
                 modifier
             )
         }
 
         fun valueFromSkillType(skillType: Skill.Type): Value {
-            return skillToEvent[skillType]!!
+            return skillToValue[skillType]!!
         }
 
-        private val skillToEvent = mapOf(
+        private val skillToValue = mapOf(
             Skill.Type.ATHLETICS to Value.ATHLETICS,
             Skill.Type.ACROBATICS to Value.ACROBATICS,
             Skill.Type.SLEIGHT_OF_HAND to Value.SLEIGHT_OF_HAND,
@@ -73,6 +91,15 @@ data class EventRoll(
             Skill.Type.INTIMIDATION to Value.INTIMIDATION,
             Skill.Type.PERFORMANCE to Value.PERFORMANCE,
             Skill.Type.PERSUASION to Value.PERSUASION,
+        )
+
+        private val characteristicToValue = mapOf(
+            Characteristic.Type.STRENGTH to Value.STRENGTH,
+            Characteristic.Type.DEXTERITY to Value.DEXTERITY,
+            Characteristic.Type.CONSTITUTION to Value.CONSTITUTION,
+            Characteristic.Type.INTELLIGENCE to Value.INTELLIGENCE,
+            Characteristic.Type.WISDOM to Value.WISDOM,
+            Characteristic.Type.CHARISMA to Value.CHARISMA,
         )
     }
 }

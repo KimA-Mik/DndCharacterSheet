@@ -5,6 +5,7 @@ import ru.kima.dndcharactersheet.R
 data class Characteristic(
     val type: Type,
     val value: Int,
+    val isSaveThrowChecked: Boolean,
     val skills: List<Skill>
 ) {
     enum class Type(val titleId: Int) {

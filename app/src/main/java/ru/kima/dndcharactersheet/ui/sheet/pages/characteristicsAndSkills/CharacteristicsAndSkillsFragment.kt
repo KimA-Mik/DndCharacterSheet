@@ -28,6 +28,7 @@ class CharacteristicsAndSkillsFragment : Fragment() {
     private val adapter: CharacteristicsAdapter by lazy {
         CharacteristicsAdapter(
             requireContext(),
+            viewModel,
             viewModel
         )
     }

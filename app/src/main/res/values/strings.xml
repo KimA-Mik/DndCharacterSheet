@@ -24,9 +24,7 @@
 
     <string name="roll_type_roll">ROLL</string>
     <string name="roll_type_check">CHECK</string>
-
-    <string name="check_value_strength">STRENGTH</string>
-    <string name="check_value_agility">AGILITY</string>
+    <string name="roll_type_save_throw">SAVE THROW</string>
 
     <string name="characteristic_strength">STRENGTH</string>
     <string name="characteristic_constitution">CONSTITUTION</string>
@@ -34,6 +32,13 @@
     <string name="characteristic_intelligence">INTELLIGENCE</string>
     <string name="characteristic_wisdom">WISDOM</string>
     <string name="characteristic_charisma">CHARISMA</string>
+
+    <string name="check_characteristic_strength">OF STRENGTH</string>
+    <string name="check_characteristic_constitution">OF CONSTITUTION</string>
+    <string name="check_characteristic_dexterity">OF DEXTERITY</string>
+    <string name="check_characteristic_intelligence">OF INTELLIGENCE</string>
+    <string name="check_characteristic_wisdom">OF WISDOM</string>
+    <string name="check_characteristic_charisma">OF CHARISMA</string>
 
     <string name="skill_athletics">ATHLETICS</string>
     <string name="check_skill_athletics">OF ATHLETICS</string>

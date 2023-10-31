@@ -23,6 +23,10 @@ class CharacteristicsDiffCallback(
             return false
         }
 
+        if (oldItem.isSaveThrowChecked != newItem.isSaveThrowChecked) {
+            return false
+        }
+
         for (i in newItem.skills.indices) {
             val oldSkill = oldItem.skills[i]
             val newSkill = newItem.skills[i]

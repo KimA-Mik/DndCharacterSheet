@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.launch
 import ru.kima.dndcharactersheet.databinding.PageCharacteristicsAndSkillsBinding
 import ru.kima.dndcharactersheet.ui.factory
+import ru.kima.dndcharactersheet.ui.sheet.pager.CHARACTER_ID
 import ru.kima.dndcharactersheet.ui.sheet.pages.characteristicsAndSkills.recyclerView.CharacteristicsAdapter
 import ru.kima.dndcharactersheet.ui.sheet.pages.characteristicsAndSkills.recyclerView.CharacteristicsDiffCallback
 
@@ -31,6 +32,12 @@ class CharacteristicsAndSkillsFragment : Fragment() {
             viewModel,
             viewModel
         )
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val charId = requireArguments().getInt(CHARACTER_ID)
+        viewModel.load(charId)
     }
 
     override fun onCreateView(

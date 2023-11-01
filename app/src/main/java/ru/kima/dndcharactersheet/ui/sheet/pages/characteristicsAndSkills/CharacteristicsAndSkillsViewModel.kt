@@ -1,8 +1,10 @@
 package ru.kima.dndcharactersheet.ui.sheet.pages.characteristicsAndSkills
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import ru.kima.dndcharactersheet.dnd.DndUtilities
@@ -10,6 +12,7 @@ import ru.kima.dndcharactersheet.model.CharactersDatabaseService
 import ru.kima.dndcharactersheet.ui.sheet.event.EventRoll
 import ru.kima.dndcharactersheet.ui.sheet.pages.characteristicsAndSkills.recyclerView.Characteristic
 import ru.kima.dndcharactersheet.ui.sheet.pages.characteristicsAndSkills.recyclerView.CharacteristicListener
+import ru.kima.dndcharactersheet.ui.sheet.pages.characteristicsAndSkills.recyclerView.Converter
 import ru.kima.dndcharactersheet.ui.sheet.pages.characteristicsAndSkills.recyclerView.Skill
 import ru.kima.dndcharactersheet.ui.sheet.pages.characteristicsAndSkills.recyclerView.skills.SkillViewListener
 import ru.kima.dndcharactersheet.ui.sheet.pages.listeners.CharacteristicsAndAbilitiesListener
@@ -17,66 +20,33 @@ import ru.kima.dndcharactersheet.ui.sheet.pages.listeners.CharacteristicsAndAbil
 class CharacteristicsAndSkillsViewModel(
     private val listener: CharacteristicsAndAbilitiesListener
 ) : ViewModel(), KoinComponent, SkillViewListener, CharacteristicListener {
-    private val dndUtilities = DndUtilities()
     private val databaseService: CharactersDatabaseService by inject()
 
-    private val characteristicsList = listOf(
-        Characteristic(
-            Characteristic.Type.STRENGTH, 19, true, listOf(
-                Skill(Skill.Type.ATHLETICS, dndUtilities.getCharacteristicsModifier(19), 1)
-            )
-        ),
-        Characteristic(
-            Characteristic.Type.DEXTERITY, 20, false, listOf(
-                Skill(Skill.Type.ACROBATICS, dndUtilities.getCharacteristicsModifier(20), 2),
-                Skill(Skill.Type.SLEIGHT_OF_HAND, dndUtilities.getCharacteristicsModifier(20), 0),
-                Skill(Skill.Type.STEALTH, dndUtilities.getCharacteristicsModifier(20), 0),
-            )
-        ),
-        Characteristic(Characteristic.Type.CONSTITUTION, 15, false, emptyList()),
-        Characteristic(
-            Characteristic.Type.INTELLIGENCE, 8, false, listOf(
-                Skill(Skill.Type.ARCANA, dndUtilities.getCharacteristicsModifier(8), 0),
-                Skill(Skill.Type.HISTORY, dndUtilities.getCharacteristicsModifier(8), 0),
-                Skill(Skill.Type.INVESTIGATION, dndUtilities.getCharacteristicsModifier(8), 0),
-                Skill(Skill.Type.NATURE, dndUtilities.getCharacteristicsModifier(8), 0),
-                Skill(Skill.Type.RELIGION, dndUtilities.getCharacteristicsModifier(8), 0),
-            )
-        ),
-        Characteristic(
-            Characteristic.Type.WISDOM, 3, false, listOf(
-                Skill(Skill.Type.ANIMAL_HANDLING, dndUtilities.getCharacteristicsModifier(3), 0),
-                Skill(Skill.Type.INSIGHT, dndUtilities.getCharacteristicsModifier(3), 0),
-                Skill(Skill.Type.MEDICINE, dndUtilities.getCharacteristicsModifier(3), 0),
-                Skill(Skill.Type.PERCEPTION, dndUtilities.getCharacteristicsModifier(3), 0),
-                Skill(Skill.Type.SURVIVAL, dndUtilities.getCharacteristicsModifier(3), 0),
-            )
-        ),
-        Characteristic(
-            Characteristic.Type.CHARISMA, 0, false, listOf(
-                Skill(Skill.Type.DECEPTION, dndUtilities.getCharacteristicsModifier(0), 0),
-                Skill(Skill.Type.INTIMIDATION, dndUtilities.getCharacteristicsModifier(0), 0),
-                Skill(Skill.Type.PERFORMANCE, dndUtilities.getCharacteristicsModifier(0), 0),
-                Skill(Skill.Type.PERSUASION, dndUtilities.getCharacteristicsModifier(0), 0),
-            )
-        )
-    )
-
-    private val _characteristics = MutableStateFlow(characteristicsList)
+    private val _characteristics = MutableStateFlow(Converter.defaultCharacteristics)
     val characteristic = _characteristics.asStateFlow()
 
-    private val reverseIndex: Map<Skill.Type, Pair<Int, Int>>
+    private var reverseIndex = mapOf<Skill.Type, Pair<Int, Int>>()
+    private var characterId = 0
 
-    init {
-        val indexMap = mutableMapOf<Skill.Type, Pair<Int, Int>>()
-        for (i in _characteristics.value.indices) {
-            val char = _characteristics.value[i]
-            for (j in char.skills.indices) {
-                val skill = char.skills[j]
-                indexMap[skill.type] = Pair(i, j)
-            }
+    fun load(id: Int) {
+        if (characterId != 0) {
+            return
         }
-        reverseIndex = indexMap
+
+        characterId = id
+        viewModelScope.launch {
+            val characteristicsEntity = databaseService.getCharacteristicsAndSkills(characterId)
+            _characteristics.value = Converter.entityToCharacteristics(characteristicsEntity)
+            val indexMap = mutableMapOf<Skill.Type, Pair<Int, Int>>()
+            for (i in _characteristics.value.indices) {
+                val char = _characteristics.value[i]
+                for (j in char.skills.indices) {
+                    val skill = char.skills[j]
+                    indexMap[skill.type] = Pair(i, j)
+                }
+            }
+            reverseIndex = indexMap
+        }
     }
 
     override fun onRoll(skillType: Skill.Type) {
@@ -111,6 +81,7 @@ class CharacteristicsAndSkillsViewModel(
             }
         }
         _characteristics.value = newList
+        updateRecord()
     }
 
     override fun onCharacteristicRoll(type: Characteristic.Type) {
@@ -121,7 +92,7 @@ class CharacteristicsAndSkillsViewModel(
                 EventRoll.fromCharacteristicType(
                     EventRoll.Type.CHECK,
                     characteristic.type,
-                    dndUtilities.getCharacteristicsModifier(characteristic.value)
+                    DndUtilities.getCharacteristicsModifier(characteristic.value)
                 )
             )
         }
@@ -132,9 +103,9 @@ class CharacteristicsAndSkillsViewModel(
 
         characteristic?.let {
             val modifier = if (characteristic.isSaveThrowChecked) {
-                dndUtilities.getCharacteristicsModifier(characteristic.value) + 3
+                DndUtilities.getCharacteristicsModifier(characteristic.value) + 3
             } else {
-                dndUtilities.getCharacteristicsModifier(characteristic.value)
+                DndUtilities.getCharacteristicsModifier(characteristic.value)
             }
             listener.onRollEvent(
                 EventRoll.fromCharacteristicType(
@@ -160,5 +131,11 @@ class CharacteristicsAndSkillsViewModel(
             }
         }
         _characteristics.value = newList
+        updateRecord()
+    }
+
+    private fun updateRecord() = viewModelScope.launch {
+        val entity = Converter.characteristicsToEntity(characterId, _characteristics.value)
+        databaseService.updateCharacteristicsAndSkills(entity)
     }
 }

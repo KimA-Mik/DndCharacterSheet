@@ -2,7 +2,7 @@ package ru.kima.dndcharactersheet.dnd
 
 import kotlin.math.floor
 
-class DndUtilities {
+object DndUtilities {
     private val levelLookupTable = intArrayOf(
         0,
         300,

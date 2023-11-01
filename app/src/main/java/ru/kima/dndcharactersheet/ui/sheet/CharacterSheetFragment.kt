@@ -23,6 +23,7 @@ import androidx.navigation.fragment.navArgs
 import kotlinx.coroutines.launch
 import ru.kima.dndcharactersheet.R
 import ru.kima.dndcharactersheet.databinding.FragmentCharacterSheetBinding
+import ru.kima.dndcharactersheet.dnd.DndUtilities
 import ru.kima.dndcharactersheet.ui.sheet.floating.DiceRollerFragment
 import ru.kima.dndcharactersheet.ui.sheet.pager.SheetPagerAdapter
 import ru.kima.dndcharactersheet.ui.sheet.pages.listeners.CharacteristicsAndAbilitiesListener
@@ -87,8 +88,8 @@ class CharacterSheetFragment : Fragment() {
                         binding.currentLevelTextView.text =
                             getString(R.string.level, character.level)
 
-                        val xpToCurrentLevel = viewModel.dndUtilities.getXpToLvlUp(character.level)
-                        val xpToNextLevel = viewModel.dndUtilities.getXpToLvlUp(character.level + 1)
+                        val xpToCurrentLevel = DndUtilities.getXpToLvlUp(character.level)
+                        val xpToNextLevel = DndUtilities.getXpToLvlUp(character.level + 1)
                         val xpToLvlUp = xpToNextLevel - xpToCurrentLevel
                         val currentXp = max(character.experiencePoints - xpToCurrentLevel, 0)
                         binding.xpTextView.text =

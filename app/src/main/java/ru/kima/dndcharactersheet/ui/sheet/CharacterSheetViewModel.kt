@@ -11,7 +11,6 @@ import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import ru.kima.dndcharactersheet.data.entities.CharacterEntity
-import ru.kima.dndcharactersheet.dnd.DndUtilities
 import ru.kima.dndcharactersheet.model.CharactersDatabaseService
 import ru.kima.dndcharactersheet.ui.sheet.event.EventRoll
 import ru.kima.dndcharactersheet.ui.sheet.pages.listeners.CharacteristicsAndAbilitiesListener
@@ -29,8 +28,6 @@ class CharacterSheetViewModel() :
     val topBarState = _tobBarState.asStateFlow()
     private val _rollEvent = MutableSharedFlow<EventRoll>()
     val rollEvent = _rollEvent.asSharedFlow()
-
-    val dndUtilities = DndUtilities()
 
     fun loadCharacter(id: Int) = viewModelScope.launch(Dispatchers.IO) {
         database.getCharacterById(id)?.let { characterEntity ->

@@ -17,7 +17,6 @@ class CharacteristicsAdapter(
     private val characteristicListener: CharacteristicListener
 ) :
     RecyclerView.Adapter<CharacteristicViewHolder>() {
-    val dndUtilities = DndUtilities()
     var characteristics = emptyList<Characteristic>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacteristicViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -33,7 +32,7 @@ class CharacteristicsAdapter(
             characteristicNameTextView.setText(characteristic.type.titleId)
             characteristicValueTextView.text = characteristic.value.toString()
 
-            val modifier = dndUtilities.getCharacteristicsModifier(characteristic.value)
+            val modifier = DndUtilities.getCharacteristicsModifier(characteristic.value)
             characteristicCheckModifierTextView.text =
                 toSignedString(modifier)
 

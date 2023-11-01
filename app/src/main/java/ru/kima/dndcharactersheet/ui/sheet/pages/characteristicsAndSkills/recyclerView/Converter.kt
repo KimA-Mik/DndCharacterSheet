@@ -26,7 +26,8 @@ object Converter {
             Characteristic(
                 Characteristic.Type.DEXTERITY,
                 e.dexterityValue,
-                e.dexterityChecked, listOf(
+                e.dexterityChecked,
+                listOf(
                     Skill(Skill.Type.ACROBATICS, dexterityModifier, e.acrobaticsLevel),
                     Skill(Skill.Type.SLEIGHT_OF_HAND, dexterityModifier, e.sleightOfHandLevel),
                     Skill(Skill.Type.STEALTH, dexterityModifier, e.stealthLevel),
@@ -223,7 +224,10 @@ object Converter {
             )
         ),
         Characteristic(
-            Characteristic.Type.DEXTERITY, 0, false, listOf(
+            Characteristic.Type.DEXTERITY,
+            10,
+            false,
+            listOf(
                 Skill(Skill.Type.ACROBATICS, 0, 0),
                 Skill(Skill.Type.SLEIGHT_OF_HAND, 0, 0),
                 Skill(Skill.Type.STEALTH, 0, 0),

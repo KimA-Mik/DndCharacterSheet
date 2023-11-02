@@ -4,4 +4,5 @@ interface CharacteristicListener {
     fun onCharacteristicRoll(type: Characteristic.Type)
     fun onCharacteristicSaveThrow(type: Characteristic.Type)
     fun onSaveThrowCheckChanged(type: Characteristic.Type)
+    fun onEditCharacteristicValue(type: Characteristic.Type)
 }

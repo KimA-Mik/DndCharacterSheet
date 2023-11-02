@@ -56,6 +56,10 @@ class CharacteristicsAdapter(
                 characteristicListener.onSaveThrowCheckChanged(characteristic.type)
             }
 
+            characteristicValueTextView.setOnClickListener {
+                characteristicListener.onEditCharacteristicValue(characteristic.type)
+            }
+
             skillsContainer.removeAllViewsInLayout()
             for (skill in characteristic.skills) {
                 val view = SkillView(skill, skillListener, parentContext)

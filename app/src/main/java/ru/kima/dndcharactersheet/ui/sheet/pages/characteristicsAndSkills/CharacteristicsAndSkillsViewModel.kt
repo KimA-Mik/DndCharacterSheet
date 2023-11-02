@@ -2,7 +2,9 @@ package ru.kima.dndcharactersheet.ui.sheet.pages.characteristicsAndSkills
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
@@ -24,6 +26,10 @@ class CharacteristicsAndSkillsViewModel(
 
     private val _characteristics = MutableStateFlow(Converter.defaultCharacteristics)
     val characteristic = _characteristics.asStateFlow()
+
+    private lateinit var _editableCharacteristic: Characteristic.Type
+    private val _characteristicEditEvent = MutableSharedFlow<Characteristic>()
+    val characteristicEditEvent = _characteristicEditEvent.asSharedFlow()
 
     private var reverseIndex = mapOf<Skill.Type, Pair<Int, Int>>()
     private var characterId = 0
@@ -80,8 +86,7 @@ class CharacteristicsAndSkillsViewModel(
                 newList.add(_characteristics.value[i])
             }
         }
-        _characteristics.value = newList
-        updateRecord()
+        updateCharacteristicsList(newList)
     }
 
     override fun onCharacteristicRoll(type: Characteristic.Type) {
@@ -130,12 +135,38 @@ class CharacteristicsAndSkillsViewModel(
                 newList.add(char)
             }
         }
-        _characteristics.value = newList
-        updateRecord()
+        updateCharacteristicsList(newList)
     }
 
-    private fun updateRecord() = viewModelScope.launch {
-        val entity = Converter.characteristicsToEntity(characterId, _characteristics.value)
-        databaseService.updateCharacteristicsAndSkills(entity)
+    override fun onEditCharacteristicValue(type: Characteristic.Type) {
+        val characteristic = _characteristics.value.find { it.type == type }
+        viewModelScope.launch {
+            characteristic?.let {
+                _editableCharacteristic = it.type
+                _characteristicEditEvent.emit(it)
+            }
+        }
+    }
+
+    fun onUpdateCharacteristicValue(newValue: Int) {
+        val newList = mutableListOf<Characteristic>()
+        for (char in _characteristics.value) {
+            if (char.type != _editableCharacteristic) {
+                newList.add(char)
+                continue
+            }
+            val newModifier = DndUtilities.getCharacteristicsModifier(newValue)
+            val newSkills = char.skills.map { it.copy(modifier = newModifier) }
+            newList.add(char.copy(value = newValue, skills = newSkills))
+        }
+        updateCharacteristicsList(newList)
+    }
+
+    private fun updateCharacteristicsList(characteristics: List<Characteristic>) {
+        _characteristics.value = characteristics
+        viewModelScope.launch {
+            val entity = Converter.characteristicsToEntity(characterId, characteristics)
+            databaseService.updateCharacteristicsAndSkills(entity)
+        }
     }
 }

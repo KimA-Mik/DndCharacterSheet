@@ -1,6 +1,10 @@
 <resources>
     <string name="empty" />
     <string name="app_name">DndCharacterSheet</string>
+
+    <string name="dialog_accept">Accept</string>
+    <string name="dialog_cancel">Cancel</string>
+
     <string name="dice_button_closed_text">Dice</string>
     <string name="dice_button_ready_text">Roll</string>
     <string name="fab_d2_text">d2</string>

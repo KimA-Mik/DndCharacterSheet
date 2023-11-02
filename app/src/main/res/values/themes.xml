@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.DndCharacterSheet" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/md_theme_light_primary</item>
@@ -74,5 +74,10 @@
         <item name="materialThemeOverlay">@style/ThemeOverlay.Material3.Button</item>
         <item name="backgroundColor">?attr/colorSecondary</item>
         <item name="android:textColor">?attr/colorOnSecondary</item>
+    </style>
+
+    <style name="Theme.DndCharacterSheet.Dialog" parent="Base.Theme.DndCharacterSheet">
+        <item name="android:colorControlNormal">?attr/colorOnSecondaryContainer</item>
+        <item name="android:textColor">?attr/colorOnSecondaryContainer</item>
     </style>
 </resources>

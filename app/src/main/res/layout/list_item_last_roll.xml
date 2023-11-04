@@ -2,11 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginStart="8dp"
     android:layout_marginBottom="8dp"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    app:layout_constrainedWidth="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
@@ -18,32 +19,41 @@
         android:paddingEnd="0dp"
         android:paddingBottom="8dp">
 
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/bottom_throw_result_barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:barrierMargin="8dp"
+            app:constraint_referenced_ids="last_roll_type_text_view, last_roll_value_text_view, total_result_text_view" />
+
         <TextView
             android:id="@+id/last_roll_type_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
             android:textColor="?attr/colorOnSecondaryContainer"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/total_result_text_view"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="БРОСОК" />
 
+        <!--                android:layout_marginStart="4dp" -->
         <TextView
             android:id="@+id/last_roll_value_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="8dp"
-            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
             android:textColor="?attr/colorOnSecondaryContainer"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toEndOf="@id/last_roll_type_text_view"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/last_roll_type_text_view"
             tools:text="МУДРОСТИ" />
 
         <TextView
@@ -51,13 +61,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:textAppearance="@style/TextAppearance.Material3.BodySmall"
             android:textColor="?attr/colorOnSecondaryContainer"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/last_roll_type_text_view"
+            app:layout_constraintTop_toBottomOf="@id/bottom_throw_result_barrier"
             tools:text="(1+1)" />
 
         <TextView
@@ -76,8 +85,10 @@
             android:id="@+id/total_result_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="4dp"
             android:textAppearance="@style/TextAppearance.Material3.HeadlineLarge"
+            android:textColor="?attr/colorOnSecondaryContainer"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1"
             app:layout_constraintStart_toEndOf="@id/last_roll_value_text_view"

@@ -16,7 +16,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:paddingBottom="8dp"
-        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+        android:textAppearance="@style/TextAppearance.Material3.BodySmall"
         android:textColor="?attr/colorOnSecondaryContainer"
         tools:text="43" />
 
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+        android:textAppearance="@style/TextAppearance.Material3.BodySmall"
         android:textColor="?attr/colorOnSecondaryContainer"
         tools:text="БРОСОК" />
 
@@ -37,7 +37,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:paddingEnd="8dp"
-        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+        android:textAppearance="@style/TextAppearance.Material3.BodySmall"
         android:textColor="?attr/colorOnSecondaryContainer"
         tools:ignore="RtlSymmetry"
         tools:text="МУДРОСТИ" />

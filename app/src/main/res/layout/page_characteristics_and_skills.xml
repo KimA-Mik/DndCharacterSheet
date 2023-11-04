@@ -8,6 +8,8 @@
         android:id="@+id/characteristics_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="90dp"
         tools:listitem="@layout/list_item_characteristic" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

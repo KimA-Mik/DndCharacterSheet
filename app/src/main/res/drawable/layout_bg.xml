@@ -2,9 +2,4 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <solid android:color="?attr/colorSecondaryContainer" />
     <corners android:radius="10dp" />
-    <padding
-        android:bottom="0dp"
-        android:left="@dimen/action_button_margin_extended"
-        android:right="0dp"
-        android:top="@dimen/action_button_margin_extended" />
 </shape>

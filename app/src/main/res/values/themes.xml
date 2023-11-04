@@ -65,8 +65,8 @@
     </style>
 
     <style name="Base.Theme.DndCharacterSheet.Fab" parent="Base.Widget.Material3.FloatingActionButton">
-        <item name="android:paddingLeft">0dp</item>
-        <item name="android:paddingRight">0dp</item>
+        <item name="android:paddingStart">0dp</item>
+        <item name="android:paddingEnd">0dp</item>
         <item name="android:paddingTop">0dp</item>
         <item name="android:paddingBottom">0dp</item>
         <item name="textStartPadding">0dp</item>

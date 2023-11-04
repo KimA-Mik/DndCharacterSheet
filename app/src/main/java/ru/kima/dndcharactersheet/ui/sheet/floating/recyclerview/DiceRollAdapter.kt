@@ -2,11 +2,13 @@ package ru.kima.dndcharactersheet.ui.sheet.floating.recyclerview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import ru.kima.dndcharactersheet.R
 import ru.kima.dndcharactersheet.databinding.ListItemLastRollBinding
 import ru.kima.dndcharactersheet.databinding.ListItemPrevRollBinding
+import ru.kima.dndcharactersheet.ui.sheet.event.EventRoll
 
 open class DiceRollHolder(val binding: ViewBinding) : RecyclerView.ViewHolder(binding.root)
 class LastRollHolder(binding: ListItemLastRollBinding) : DiceRollHolder(binding)
@@ -47,6 +49,8 @@ class DiceRollAdapter(private val listListener: RollListListener) :
                 val binding = holder.binding as ListItemLastRollBinding
                 binding.apply {
                     totalResultTextView.text = roll.sum.toString()
+
+                    lastRollValueTextView.isVisible = roll.value != EventRoll.Value.NONE
                     lastRollValueTextView.setText(roll.value.strId)
                     lastRollTypeTextView.setText(roll.type.strId)
                     resultsTextView.text = roll.results

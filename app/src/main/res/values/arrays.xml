@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="settings_list_dark_theme_titles">
+        <item>System</item>
+        <item>Off</item>
+        <item>On</item>
+    </string-array>
+    <string-array name="settings_list_dark_theme_values">
+        <item>0</item>
+        <item>-1</item>
+        <item>1</item>
+    </string-array>
+</resources>

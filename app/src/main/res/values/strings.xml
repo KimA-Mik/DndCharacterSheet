@@ -1,5 +1,10 @@
 <resources>
+    <string name="empty" />
     <string name="app_name">DndCharacterSheet</string>
+
+    <string name="dialog_accept">Accept</string>
+    <string name="dialog_cancel">Cancel</string>
+
     <string name="dice_button_closed_text">Dice</string>
     <string name="dice_button_ready_text">Roll</string>
     <string name="fab_d2_text">d2</string>
@@ -13,5 +18,75 @@
     <string name="clear_rolls_button_content_description">This button clears list of rolls</string>
     <string name="dash">–</string>
     <string name="hp">%1$d/%2$d</string>
+    <string name="race_and_class">%1$s – %2$s</string>
+    <string name="level">%1$d LEVEL</string>
+    <string name="button_collapse">COLLAPSE</string>
+    <string name="button_expand">EXPAND</string>
+
+    <string name="characteristics_and_abilities">Characteristics and skills</string>
+    <string name="attacks_and_skills">Attacks and abilities</string>
+
+    <string name="roll_type_roll">ROLL</string>
+    <string name="roll_type_check">CHECK</string>
+    <string name="roll_type_save_throw">SAVE THROW</string>
+
+    <string name="characteristic_strength">STRENGTH</string>
+    <string name="characteristic_constitution">CONSTITUTION</string>
+    <string name="characteristic_dexterity">DEXTERITY</string>
+    <string name="characteristic_intelligence">INTELLIGENCE</string>
+    <string name="characteristic_wisdom">WISDOM</string>
+    <string name="characteristic_charisma">CHARISMA</string>
+
+    <string name="check_characteristic_strength">OF STRENGTH</string>
+    <string name="check_characteristic_constitution">OF CONSTITUTION</string>
+    <string name="check_characteristic_dexterity">OF DEXTERITY</string>
+    <string name="check_characteristic_intelligence">OF INTELLIGENCE</string>
+    <string name="check_characteristic_wisdom">OF WISDOM</string>
+    <string name="check_characteristic_charisma">OF CHARISMA</string>
+
+    <string name="skill_athletics">ATHLETICS</string>
+    <string name="check_skill_athletics">OF ATHLETICS</string>
+    <string name="skill_acrobatics">ACROBATICS</string>
+    <string name="check_skill_acrobatics">OF ACROBATICS</string>
+    <string name="skill_sleight_of_hand">SLEIGHT OF HAND</string>
+    <string name="check_skill_sleight_of_hand">OF SLEIGHT OF HAND</string>
+    <string name="skill_stealth">STEALTH</string>
+    <string name="check_skill_stealth">OF STEALTH</string>
+    <string name="skill_arcana">ARCANA</string>
+    <string name="check_skill_arcana">OF ARCANA</string>
+    <string name="skill_history">HISTORY</string>
+    <string name="check_skill_history">OF HISTORY</string>
+    <string name="skill_investigation">INVESTIGATION</string>
+    <string name="check_skill_investigation">OF INVESTIGATION</string>
+    <string name="skill_nature">NATURE</string>
+    <string name="check_skill_nature">OF NATURE</string>
+    <string name="skill_religion">RELIGION</string>
+    <string name="check_skill_religion">OF RELIGION</string>
+    <string name="skill_animal_handling">ANIMAL HANDLING</string>
+    <string name="check_skill_animal_handling">OF ANIMAL HANDLING</string>
+    <string name="skill_insight">INSIGHT</string>
+    <string name="check_skill_insight">OF INSIGHT</string>
+    <string name="skill_medicine">MEDICINE</string>
+    <string name="check_skill_medicine">OF MEDICINE</string>
+    <string name="skill_perception">PERCEPTION</string>
+    <string name="check_skill_perception">OF PERCEPTION</string>
+    <string name="skill_survival">SURVIVAL</string>
+    <string name="check_skill_survival">OF SURVIVAL</string>
+    <string name="skill_deception">DECEPTION</string>
+    <string name="check_skill_deception">OF DECEPTION</string>
+    <string name="skill_intimidation">INTIMIDATION</string>
+    <string name="check_skill_intimidation">OF INTIMIDATION</string>
+    <string name="skill_performance">PERFORMANCE</string>
+    <string name="check_skill_performance">OF PERFORMANCE</string>
+    <string name="skill_persuasion">PERSUASION</string>
+    <string name="check_skill_persuasion">OF PERSUASION</string>
+
+    <string name="menu_item_search_title">Search</string>
+    <string name="menu_item_settings_title">Settings</string>
+    <string name="characters_list_search_bar_hint">Search hero</string>
+    <string name="create_character_fab_content_description">Add character</string>
+    z
+    <string name="dark_theme_preference_key">dark_theme_preference</string>
+    <string name="preference_category_appearance">Appearance</string>
 
 </resources>

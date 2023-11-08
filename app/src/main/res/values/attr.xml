@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="colorHpGreen" format="color" />
+    <attr name="colorOnHpGreen" format="color" />
+    <attr name="colorHpGreenContainer" format="color" />
+    <attr name="colorOnHpGreenContainer" format="color" />
+    <attr name="harmonizeHpGreen" format="boolean" />
+    <attr name="colorHpYellow" format="color" />
+    <attr name="colorOnHpYellow" format="color" />
+    <attr name="colorHpYellowContainer" format="color" />
+    <attr name="colorOnHpYellowContainer" format="color" />
+    <attr name="harmonizeHpYellow" format="boolean" />
+    <attr name="colorHpRed" format="color" />
+    <attr name="colorOnHpRed" format="color" />
+    <attr name="colorHpRedContainer" format="color" />
+    <attr name="colorOnHpRedContainer" format="color" />
+    <attr name="harmonizeHpRed" format="boolean" />
+    <attr name="colorXp" format="color" />
+    <attr name="colorOnXp" format="color" />
+    <attr name="colorXpContainer" format="color" />
+    <attr name="colorOnXpContainer" format="color" />
+    <attr name="harmonizeXp" format="boolean" />
+</resources>

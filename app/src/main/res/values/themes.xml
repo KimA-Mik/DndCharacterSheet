@@ -1,20 +1,83 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.DndCharacterSheet" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/md_theme_light_primary</item>
+        <item name="colorOnPrimary">@color/md_theme_light_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/md_theme_light_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/md_theme_light_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/md_theme_light_secondary</item>
+        <item name="colorOnSecondary">@color/md_theme_light_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/md_theme_light_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/md_theme_light_onSecondaryContainer</item>
+        <item name="colorTertiary">@color/md_theme_light_tertiary</item>
+        <item name="colorOnTertiary">@color/md_theme_light_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/md_theme_light_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/md_theme_light_onTertiaryContainer</item>
+        <item name="colorError">@color/md_theme_light_error</item>
+        <item name="colorErrorContainer">@color/md_theme_light_errorContainer</item>
+        <item name="colorOnError">@color/md_theme_light_onError</item>
+        <item name="colorOnErrorContainer">@color/md_theme_light_onErrorContainer</item>
+        <item name="android:colorBackground">@color/md_theme_light_background</item>
+        <item name="colorOnBackground">@color/md_theme_light_onBackground</item>
+        <item name="colorSurface">@color/md_theme_light_surface</item>
+        <item name="colorOnSurface">@color/md_theme_light_onSurface</item>
+        <item name="colorSurfaceVariant">@color/md_theme_light_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/md_theme_light_onSurfaceVariant</item>
+        <item name="colorOutline">@color/md_theme_light_outline</item>
+        <item name="colorOnSurfaceInverse">@color/md_theme_light_inverseOnSurface</item>
+        <item name="colorSurfaceInverse">@color/md_theme_light_inverseSurface</item>
+        <item name="colorHpGreen">#026e00</item>
+        <item name="colorOnHpGreen">#ffffff</item>
+        <item name="colorHpGreenContainer">#77ff61</item>
+        <item name="colorOnHpGreenContainer">#002200</item>
+        <item name="harmonizeHpGreen">true</item>
+        <item name="colorHpYellow">#755b00</item>
+        <item name="colorOnHpYellow">#ffffff</item>
+        <item name="colorHpYellowContainer">#ffdf91</item>
+        <item name="colorOnHpYellowContainer">#241a00</item>
+        <item name="harmonizeHpYellow">true</item>
+        <item name="colorHpRed">#b62329</item>
+        <item name="colorOnHpRed">#ffffff</item>
+        <item name="colorHpRedContainer">#ffdad7</item>
+        <item name="colorOnHpRedContainer">#410004</item>
+        <item name="harmonizeHpRed">true</item>
+        <item name="colorXp">#7639d0</item>
+        <item name="colorOnXp">#ffffff</item>
+        <item name="colorXpContainer">#ecdcff</item>
+        <item name="colorOnXpContainer">#270057</item>
+        <item name="harmonizeXp">true</item>
+        <item name="colorPrimaryInverse">@color/md_theme_light_inversePrimary</item>
     </style>
 
-    <style name="Theme.DndCharacterSheet" parent="Base.Theme.DndCharacterSheet" />
+    <style name="Theme.DndCharacterSheet" parent="Base.Theme.DndCharacterSheet">
+        <!--        Thanks to https://stackoverflow.com/a/70959630-->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="Theme.DndCharacterSheet.Toolbar.Surface" parent="Widget.Material3.Toolbar.Surface">
+        <item name="elevation">4dp</item>
+    </style>
+
+    <style name="Theme.DndCharacterSheet.Popup" parent="Widget.Material3.PopupMenu">
+        <item name="background">@color/md_theme_light_surface</item>
+        <item name="android:popupElevation">4dp</item>
+    </style>
 
     <style name="Base.Theme.DndCharacterSheet.Fab" parent="Base.Widget.Material3.FloatingActionButton">
-        <item name="android:paddingLeft">0dp</item>
-        <item name="android:paddingRight">0dp</item>
+        <item name="android:paddingStart">0dp</item>
+        <item name="android:paddingEnd">0dp</item>
         <item name="android:paddingTop">0dp</item>
         <item name="android:paddingBottom">0dp</item>
         <item name="textStartPadding">0dp</item>
         <item name="textEndPadding">0dp</item>
         <item name="materialThemeOverlay">@style/ThemeOverlay.Material3.Button</item>
-        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="backgroundColor">?attr/colorSecondary</item>
+        <item name="android:textColor">?attr/colorOnSecondary</item>
+    </style>
+
+    <style name="Theme.DndCharacterSheet.Dialog" parent="Base.Theme.DndCharacterSheet">
+        <item name="android:colorControlNormal">?attr/colorOnSecondaryContainer</item>
+        <item name="android:textColor">?attr/colorOnSecondaryContainer</item>
     </style>
 </resources>

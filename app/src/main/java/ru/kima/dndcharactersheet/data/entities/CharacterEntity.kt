@@ -12,5 +12,8 @@ data class CharacterEntity(
     val race: String = String(),
     val charClass: String = String(),
     val currentHp: Int = 0,
-    val maxHp: Int = 0
+    val maxHp: Int = 0,
+    val armorClass: Int = 0,
+    val experiencePoints: Int = 0,
+    val level: Int = 1
 )

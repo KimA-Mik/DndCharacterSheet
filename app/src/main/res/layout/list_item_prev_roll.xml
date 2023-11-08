@@ -6,7 +6,8 @@
     android:layout_marginStart="8dp"
     android:layout_marginBottom="8dp"
     android:background="@drawable/layout_bg"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:padding="0dp">
 
     <TextView
         android:id="@+id/total_result_text_view"
@@ -15,23 +16,29 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:paddingBottom="8dp"
+        android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+        android:textColor="?attr/colorOnSecondaryContainer"
         tools:text="43" />
 
     <TextView
-        android:id="@+id/action_text_view"
+        android:id="@+id/last_roll_type_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+        android:textColor="?attr/colorOnSecondaryContainer"
         tools:text="БРОСОК" />
 
     <TextView
-        android:id="@+id/type_text_view"
+        android:id="@+id/last_roll_value_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:paddingEnd="8dp"
+        android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+        android:textColor="?attr/colorOnSecondaryContainer"
         tools:ignore="RtlSymmetry"
         tools:text="МУДРОСТИ" />
 </LinearLayout>

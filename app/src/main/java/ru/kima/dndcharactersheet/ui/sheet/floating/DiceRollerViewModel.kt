@@ -4,8 +4,10 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import ru.kima.dndcharactersheet.ui.sheet.event.EventRoll
 import ru.kima.dndcharactersheet.ui.sheet.floating.recyclerview.DiceRoll
 import ru.kima.dndcharactersheet.ui.sheet.floating.recyclerview.RollListListener
+import kotlin.math.abs
 import kotlin.random.Random
 
 class DiceRollerViewModel : ViewModel(),
@@ -40,13 +42,8 @@ class DiceRollerViewModel : ViewModel(),
 
             FloatingMenuState.Ready -> {
                 _floatingMenuState.value = FloatingMenuState.Closed
-                var newList = _rolls.value + calculateDiceRoll()
-
-                if (newList.size > 5) {
-                    newList = newList.drop(1)
-                }
-
-                _rolls.value = newList
+                val diceRoll = calculateDiceRoll(_dice.value)
+                addDiceRoll(diceRoll)
                 _dice.value.clear()
             }
         }
@@ -89,6 +86,25 @@ class DiceRollerViewModel : ViewModel(),
         return true
     }
 
+    fun rollD20(modifier: Int, type: EventRoll.Type, value: EventRoll.Value) {
+        val d20 = mapOf(20 to 1)
+        val roll = calculateDiceRoll(d20, modifier)
+            .copy(
+                type = type,
+                value = value
+            )
+        addDiceRoll(roll)
+    }
+
+    private fun addDiceRoll(diceRoll: DiceRoll) {
+        var newList = _rolls.value + diceRoll
+        if (newList.size > 5) {
+            newList = newList.drop(1)
+        }
+
+        _rolls.value = newList
+    }
+
     private fun copyMap(): MutableMap<Int, Int> {
         val newMap = mutableMapOf<Int, Int>()
         dice.value.forEach { (sides, count) ->
@@ -101,11 +117,11 @@ class DiceRollerViewModel : ViewModel(),
         _rolls.value = emptyList()
     }
 
-    private fun calculateDiceRoll(): DiceRoll {
+    private fun calculateDiceRoll(diceRoll: Map<Int, Int>, modifier: Int = 0): DiceRoll {
         val resSb = StringBuilder()
         val diceSb = StringBuilder()
-        var sum = 0
-        _dice.value.forEach { (sides, count) ->
+        var sum = modifier
+        diceRoll.forEach { (sides, count) ->
             if (count == 0) {
                 return@forEach
             }
@@ -131,7 +147,24 @@ class DiceRollerViewModel : ViewModel(),
             diceSb.append("(${count}d${sides}")
             diceSb.append(')')
         }
-        return DiceRoll(sum, resSb.toString(), diceSb.toString())
+
+        if (modifier != 0) {
+            if (modifier > 0) {
+                resSb.append(" + ")
+                diceSb.append(" + ")
+            } else {
+                resSb.append(" - ")
+                diceSb.append(" - ")
+            }
+            diceSb.append(abs(modifier))
+            resSb.append(abs(modifier))
+        }
+
+        return DiceRoll(
+            sum,
+            resSb.toString(), diceSb.toString(),
+            EventRoll.Type.NONE, EventRoll.Value.NONE
+        )
     }
 
     private fun rollDice(sides: Int): Int {

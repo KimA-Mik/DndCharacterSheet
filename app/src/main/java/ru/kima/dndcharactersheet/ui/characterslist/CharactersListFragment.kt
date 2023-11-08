@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -15,10 +16,10 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.launch
 import ru.kima.dndcharactersheet.databinding.FragmentCharactersListBinding
+import ru.kima.dndcharactersheet.ui.characterslist.menu.CharacterListMenuProvider
 import ru.kima.dndcharactersheet.ui.characterslist.recyclerview.CharactersListAdapter
 import ru.kima.dndcharactersheet.ui.characterslist.recyclerview.CharactersListDiffCallback
 import ru.kima.dndcharactersheet.ui.characterslist.recyclerview.SwipeCallback
-import ru.kima.dndcharactersheet.ui.factory
 
 class CharactersListFragment : Fragment() {
     private var _binding: FragmentCharactersListBinding? = null
@@ -27,7 +28,7 @@ class CharactersListFragment : Fragment() {
             "Cannot access binding because it is null. Is the view visible?"
         }
 
-    private val viewModel: CharacterListViewModel by viewModels() { factory() }
+    private val viewModel: CharacterListViewModel by viewModels()
     private val adapter: CharactersListAdapter by lazy {
         CharactersListAdapter(
             requireContext(),
@@ -73,15 +74,33 @@ class CharactersListFragment : Fragment() {
                     }
                 }
                 launch {
-                    viewModel.showSheet.collect { navEvent ->
-                        navEvent.getValue()?.let { charId ->
-                            findNavController().navigate(
-                                CharactersListFragmentDirections.showCharacterSheet(charId)
-                            )
+                    viewModel.navigationEvent.collect { navEvent ->
+                        when (navEvent) {
+                            is NavigationEvent.Settings ->
+                                findNavController().navigate(
+                                    CharactersListFragmentDirections.showSettings()
+                                )
+
+                            is NavigationEvent.ShowSheet ->
+                                findNavController().navigate(
+                                    CharactersListFragmentDirections.showCharacterSheet(navEvent.data)
+                                )
                         }
                     }
                 }
             }
         }
+
+        val menuProvider = CharacterListMenuProvider(viewModel)
+        binding.charactersListSearchView
+            .editText.addTextChangedListener { text ->
+                text?.toString()?.let { viewModel.onQuery(it) }
+            }
+
+        binding.charactersListSearchBar.addMenuProvider(
+            menuProvider,
+            viewLifecycleOwner,
+            Lifecycle.State.STARTED
+        )
     }
 }

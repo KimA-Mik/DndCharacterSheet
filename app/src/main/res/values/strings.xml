@@ -85,8 +85,16 @@
     <string name="menu_item_settings_title">Settings</string>
     <string name="characters_list_search_bar_hint">Search hero</string>
     <string name="create_character_fab_content_description">Add character</string>
-    z
+
     <string name="dark_theme_preference_key">dark_theme_preference</string>
     <string name="preference_category_appearance">Appearance</string>
 
+    <string name="button_save">Save</string>
+
+    <string name="character_name_hint">Name</string>
+    <string name="character_class_hint">Class</string>
+    <string name="character_race_hint">Race</string>
+    <string name="character_armor_class_hint">Armor class</string>
+    <string name="character_speed_hint">Speed</string>
+    <string name="character_initiative_hint">Initiative</string>
 </resources>

@@ -19,11 +19,14 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import kotlinx.coroutines.launch
 import ru.kima.dndcharactersheet.R
 import ru.kima.dndcharactersheet.databinding.FragmentCharacterSheetBinding
 import ru.kima.dndcharactersheet.dnd.DndUtilities
+import ru.kima.dndcharactersheet.ui.editCharacter.info.INFO_EDITED_KEY
+import ru.kima.dndcharactersheet.ui.sheet.event.NavigationEvent
 import ru.kima.dndcharactersheet.ui.sheet.floating.DiceRollerFragment
 import ru.kima.dndcharactersheet.ui.sheet.pager.SheetPagerAdapter
 import ru.kima.dndcharactersheet.ui.sheet.pages.listeners.CharacteristicsAndAbilitiesListener
@@ -57,6 +60,13 @@ class CharacterSheetFragment : Fragment() {
         _binding = FragmentCharacterSheetBinding.inflate(layoutInflater, container, false)
         val pagerAdapter = SheetPagerAdapter(this, args.characterId)
         binding.elementPager.adapter = pagerAdapter
+
+//        parentFragmentManager.setFragmentResultListener(
+//            EDIT_NUMBER_DIALOG_REQUEST_KEY,
+//            viewLifecycleOwner
+//        ) { key, bundle ->
+//
+//        }
         return binding.root
     }
 
@@ -74,6 +84,7 @@ class CharacterSheetFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val navController = findNavController()
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
@@ -106,7 +117,7 @@ class CharacterSheetFragment : Fragment() {
                         maxXp = xpToNextLevel
                         binding.debugSeekbar.progress = xpBarPercent
 
-                        binding.armorTextView.text = character.armorClass.toString()
+                        binding.armorTextView.text = character.armorClass
 
                         binding.sheetHpTextView.text =
                             getString(R.string.hp, character.currentHp, character.maxHp)
@@ -140,13 +151,42 @@ class CharacterSheetFragment : Fragment() {
                         }
                     }
                 }
+
+                launch {
+                    viewModel.navEvent.collect { navEvent ->
+                        when (navEvent) {
+                            NavigationEvent.EDIT_CHARACTER_INFO -> findNavController().navigate(
+                                CharacterSheetFragmentDirections.editCharacterInfo(viewModel.characterId)
+                            )
+                        }
+                    }
+                }
+
+                launch {
+                    navController.currentBackStackEntry?.savedStateHandle?.getStateFlow(
+                        INFO_EDITED_KEY,
+                        false
+                    )?.collect { update ->
+                        if (update) {
+                            viewModel.loadCharacter(args.characterId)
+                        }
+                    }
+                }
             }
         }
 
-        binding.collapseButton.setOnClickListener { viewModel.onCollapseButtonClicked() }
 
-        val diceRoller = binding.dieRollerContainer.getFragment<DiceRollerFragment>()
-        diceRoller.registerEvents(viewModel.rollEvent)
+        binding.apply {
+            collapseButton.setOnClickListener { viewModel.onCollapseButtonClicked() }
+
+            val diceRoller = dieRollerContainer.getFragment<DiceRollerFragment>()
+            diceRoller.registerEvents(viewModel.rollEvent)
+
+//            armorTextView.setOnClickListener {  }
+            armorButton.setOnClickListener { viewModel.openEditCharacterInfo() }
+            characterNameTextView.setOnClickListener { viewModel.openEditCharacterInfo() }
+            raceAndClassTextView.setOnClickListener { viewModel.openEditCharacterInfo() }
+        }
 
 
 //                        val parent = binding.xpProgressBar.parent as FrameLayout

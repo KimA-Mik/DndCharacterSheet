@@ -13,6 +13,13 @@
         <argument
             android:name="character_id"
             app:argType="integer" />
+        <action
+            android:id="@+id/edit_character_info"
+            app:destination="@id/editCharacterInfoFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/charactersListFragment"
@@ -21,14 +28,31 @@
         tools:layout="@layout/fragment_characters_list">
         <action
             android:id="@+id/show_character_sheet"
-            app:destination="@id/characterSheetFragment" />
+            app:destination="@id/characterSheetFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/show_settings"
-            app:destination="@id/settingsFragment" />
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="ru.kima.dndcharactersheet.ui.settings.SettingsContainerFragment"
         android:label="SettingsFragment"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/editCharacterInfoFragment"
+        android:name="ru.kima.dndcharactersheet.ui.editCharacter.info.EditCharacterInfoFragment"
+        android:label="EditCharacterInfoFragment"
+        tools:layout="@layout/fragment_edit_character_info">
+        <argument
+            android:name="character_id"
+            app:argType="integer" />
+    </fragment>
 </navigation>

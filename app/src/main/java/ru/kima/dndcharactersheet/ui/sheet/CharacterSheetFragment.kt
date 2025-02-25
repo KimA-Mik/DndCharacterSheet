@@ -12,6 +12,7 @@ import android.widget.SeekBar.OnSeekBarChangeListener
 import androidx.annotation.ColorInt
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.view.ViewCompat
 import androidx.core.view.doOnLayout
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -28,6 +29,7 @@ import ru.kima.dndcharactersheet.ui.sheet.floating.DiceRollerFragment
 import ru.kima.dndcharactersheet.ui.sheet.pager.SheetPagerAdapter
 import ru.kima.dndcharactersheet.ui.sheet.pages.listeners.CharacteristicsAndAbilitiesListener
 import ru.kima.dndcharactersheet.util.GraphicUtils
+import ru.kima.dndcharactersheet.util.SetSystemBarsInsetsListener
 import kotlin.math.max
 
 
@@ -55,6 +57,7 @@ class CharacterSheetFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCharacterSheetBinding.inflate(layoutInflater, container, false)
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root, SetSystemBarsInsetsListener)
         val pagerAdapter = SheetPagerAdapter(this, args.characterId)
         binding.elementPager.adapter = pagerAdapter
         return binding.root

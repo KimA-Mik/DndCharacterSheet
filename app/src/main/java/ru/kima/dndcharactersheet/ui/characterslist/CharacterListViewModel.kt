@@ -35,7 +35,7 @@ class CharacterListViewModel :
             maxHp = 8,
             level = 3,
             experiencePoints = 1080,
-            armorClass = 16
+            armorClass = "16"
         ),
         CharacterEntity(
             name = "Болт",
@@ -45,7 +45,7 @@ class CharacterListViewModel :
             maxHp = 12,
             level = 1,
             experiencePoints = 150,
-            armorClass = 14
+            armorClass = "14"
         )
     )
     private var allCharacters = emptyList<CharacterEntity>()

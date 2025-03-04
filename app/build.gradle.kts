@@ -55,6 +55,7 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.4.0")
     implementation("androidx.preference:preference-ktx:1.2.1")
     val navigationVersion = "2.8.7"
+    
     implementation("androidx.navigation:navigation-fragment-ktx:$navigationVersion")
     implementation("androidx.navigation:navigation-ui-ktx:$navigationVersion")
     val roomVersion = "2.6.1"
@@ -63,6 +64,7 @@ dependencies {
     implementation("androidx.room:room-ktx:$roomVersion")
     ksp("androidx.room:room-compiler:$roomVersion")
     val koinVersion = "4.0.0"
+
     implementation("io.insert-koin:koin-core:$koinVersion")
     implementation("io.insert-koin:koin-android:$koinVersion")
     testImplementation("junit:junit:4.13.2")

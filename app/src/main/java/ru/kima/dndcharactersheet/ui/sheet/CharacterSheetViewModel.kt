@@ -13,6 +13,7 @@ import org.koin.core.component.inject
 import ru.kima.dndcharactersheet.data.entities.CharacterEntity
 import ru.kima.dndcharactersheet.model.CharactersDatabaseService
 import ru.kima.dndcharactersheet.ui.sheet.event.EventRoll
+import ru.kima.dndcharactersheet.ui.sheet.event.NavigationEvent
 import ru.kima.dndcharactersheet.ui.sheet.pages.listeners.CharacteristicsAndAbilitiesListener
 import kotlin.random.Random
 
@@ -28,6 +29,11 @@ class CharacterSheetViewModel() :
     val topBarState = _tobBarState.asStateFlow()
     private val _rollEvent = MutableSharedFlow<EventRoll>()
     val rollEvent = _rollEvent.asSharedFlow()
+    private val _navEvent = MutableSharedFlow<NavigationEvent>()
+    val navEvent = _navEvent.asSharedFlow()
+
+    val characterId
+        get() = _character.value.id
 
     fun loadCharacter(id: Int) = viewModelScope.launch(Dispatchers.IO) {
         database.getCharacterById(id)?.let { characterEntity ->
@@ -46,6 +52,12 @@ class CharacterSheetViewModel() :
             TopBarState.COLLAPSED
         else
             TopBarState.EXPANDED
+    }
+
+    fun openEditCharacterInfo() {
+        viewModelScope.launch {
+            _navEvent.emit(NavigationEvent.EDIT_CHARACTER_INFO)
+        }
     }
 
     companion object {

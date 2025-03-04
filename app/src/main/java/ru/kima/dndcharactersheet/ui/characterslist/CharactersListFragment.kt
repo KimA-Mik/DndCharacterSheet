@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -20,6 +21,7 @@ import ru.kima.dndcharactersheet.ui.characterslist.menu.CharacterListMenuProvide
 import ru.kima.dndcharactersheet.ui.characterslist.recyclerview.CharactersListAdapter
 import ru.kima.dndcharactersheet.ui.characterslist.recyclerview.CharactersListDiffCallback
 import ru.kima.dndcharactersheet.ui.characterslist.recyclerview.SwipeCallback
+import ru.kima.dndcharactersheet.util.SetSystemBarsInsetsListener
 
 class CharactersListFragment : Fragment() {
     private var _binding: FragmentCharactersListBinding? = null
@@ -43,6 +45,7 @@ class CharactersListFragment : Fragment() {
     ): View {
         _binding = FragmentCharactersListBinding.inflate(layoutInflater, container, false)
 
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root, SetSystemBarsInsetsListener)
         //Config recyclerView
         binding.charactersRecyclerView.layoutManager = LinearLayoutManager(context)
         binding.charactersRecyclerView.adapter = adapter
